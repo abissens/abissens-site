@@ -1,0 +1,15 @@
+.themeButton {
+  background: url("/assets/moon.svg") no-repeat center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  padding: 4px 15px;
+  margin: 0;
+}
+
+:global(.dark) .themeButton {
+  background: url("/assets/sun.svg") no-repeat center;
+  background-size: contain;
+}

@@ -1,0 +1,18 @@
+.paginatedPostList {
+  width: 100%;
+}
+
+.postCount {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  p {
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+:global(.dark) .postCount p {
+  color: var(--text-secondary, #9ca3af);
+}

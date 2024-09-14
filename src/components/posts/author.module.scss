@@ -1,0 +1,45 @@
+@mixin icon-style($mask-url) {
+  width: 12px;
+  height: 12px;
+  background: var(--secondary);
+  mask: url($mask-url) no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url($mask-url) no-repeat center;
+  -webkit-mask-size: contain;
+
+  &:hover {
+    background: var(--text);
+  }
+}
+
+.author {
+  display: inline-flex;
+  align-items: center;
+  color: var(--secondary);
+}
+
+.authorName {
+  margin-right: 0.5rem;
+}
+
+.authorLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.x {
+  @include icon-style('/assets/x.svg');
+}
+
+.email {
+  @include icon-style('/assets/email.svg');
+}
+
+.github {
+  @include icon-style('/assets/github.svg');
+}
+
+.linkedin {
+  @include icon-style('/assets/linkedin.svg');
+}

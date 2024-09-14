@@ -1,0 +1,50 @@
+
+.postHeader {
+  margin: 35px 0;
+  
+  .postTitle {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .postHead {
+    display: flex;    
+    justify-content: center;
+    font-size: 0.875rem;
+    color: var(--secondary);
+    line-height: 20px;
+
+    .calendar {
+      margin-right: 5px;
+      width: 16px;
+      height: 16px;
+      background: var(--secondary);
+      mask: url('/assets/calendar.svg') no-repeat center;
+      mask-size: contain;
+      -webkit-mask: url('/assets/calendar.svg') no-repeat center;
+      -webkit-mask-size: contain;
+    }
+
+    .author {
+      margin-left: 15px;
+    }
+  }
+}
+
+.postContent {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--text);
+
+  margin: 5px 10px;
+
+  @media (max-width: 768px) {
+
+    margin: 5px 25px;
+  }
+}
+
+
+
+
