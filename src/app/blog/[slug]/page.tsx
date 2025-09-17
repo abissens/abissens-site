@@ -3,13 +3,17 @@ import {postBundle} from '@/lib/posts';
 import {notFound} from 'next/navigation';
 import AuthorComponent from '@/components/posts/author';
 import TagList from '@/components/tags/TagList';
-import FloatingSocialShare from '@/components/share/FloatingSocialShare';
+import dynamic from 'next/dynamic';
 import styles from './page.module.scss';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { BlogPostStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 import type { Metadata } from 'next';
+
+const FloatingSocialShare = dynamic(() => import('@/components/share/FloatingSocialShare'), {
+    loading: () => <div style={{ minHeight: '200px' }} />
+});
 
 export async function generateStaticParams() {
     return postBundle.getPosts().map(post => ({slug: post.slug}));

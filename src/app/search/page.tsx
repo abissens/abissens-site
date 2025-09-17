@@ -1,7 +1,21 @@
-import { Suspense } from 'react';
-import BasicSearch from '@/components/search/BasicSearch';
+import dynamic from 'next/dynamic';
 import { metadataInf } from '@/components/metadata';
 import type { Metadata } from 'next';
+
+const BasicSearch = dynamic(() => import('@/components/search/BasicSearch'), {
+    loading: () => (
+        <div style={{
+            minHeight: '400px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.1rem',
+            color: 'var(--secondary)'
+        }}>
+            Loading search...
+        </div>
+    )
+});
 
 export const metadata: Metadata = {
   title: `Search | ${metadataInf.siteName}`,
@@ -29,9 +43,5 @@ export const metadata: Metadata = {
 };
 
 export default function Search() {
-  return (
-    <Suspense fallback={<div>Loading search...</div>}>
-      <BasicSearch />
-    </Suspense>
-  );
+  return <BasicSearch />;
 }

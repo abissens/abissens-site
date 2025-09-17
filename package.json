@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next build & npx serve@latest out",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "analyze": "set ANALYZE=true && npm run build"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -17,14 +18,13 @@
     "next-mdx-remote": "^5.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-markdown": "^10.1.0",
     "rehype-highlight": "^7.0.2",
     "remark": "^15.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-html": "^16.0.1"
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@next/bundle-analyzer": "^15.5.3",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.3.3",
     "@types/react": "^19.1.13",
