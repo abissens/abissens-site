@@ -1,42 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useShareActions, ShareConfig } from '@/hooks/useShareActions';
 import styles from './FloatingSocialShare.module.scss';
 
-interface FloatingSocialShareProps {
-  url: string;
-  title: string;
-  description?: string;
-  socialUrls?: {
-    twitter?: string;
-    linkedin?: string;
-  };
-}
+type FloatingSocialShareProps = ShareConfig;
 
 export default function FloatingSocialShare({ url, title, description, socialUrls }: FloatingSocialShareProps) {
-  const [copied, setCopied] = useState(false);
-
-  const shareData = {
-    url: encodeURIComponent(url),
-    title: encodeURIComponent(title),
-    description: encodeURIComponent(description || title),
-  };
-
-  const shareLinks = {
-    twitter: socialUrls?.twitter || `https://twitter.com/intent/tweet?url=${shareData.url}&text=${shareData.title}`,
-    linkedin: socialUrls?.linkedin || `https://www.linkedin.com/sharing/share-offsite/?url=${shareData.url}`,
-  };
-
-  const handleShare = (platform: string) => {
-    if (platform === 'copy') {
-      navigator.clipboard.writeText(url).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      });
-    } else {
-      window.open(shareLinks[platform as keyof typeof shareLinks], '_blank', 'noopener,noreferrer');
-    }
-  };
+  const { copied, handleShare, getAriaLabel, getButtonLabel, isReshare } = useShareActions({
+    url,
+    title,
+    description,
+    socialUrls,
+  });
 
   return (
     <>
@@ -46,18 +21,18 @@ export default function FloatingSocialShare({ url, title, description, socialUrl
 
         <button
           onClick={() => handleShare('twitter')}
-          className={`${styles.shareButton} ${styles.twitter} ${socialUrls?.twitter ? styles.reshare : ''}`}
-          aria-label={socialUrls?.twitter ? "Retweet on Twitter" : "Share on Twitter"}
-          title={socialUrls?.twitter ? "Retweet existing post" : "Share on Twitter"}
+          className={`${styles.shareButton} ${styles.twitter} ${isReshare('twitter') ? styles.reshare : ''}`}
+          aria-label={getAriaLabel('twitter')}
+          title={getAriaLabel('twitter')}
         >
           <div className={styles.shareIcon}></div>
         </button>
 
         <button
           onClick={() => handleShare('linkedin')}
-          className={`${styles.shareButton} ${styles.linkedin} ${socialUrls?.linkedin ? styles.reshare : ''}`}
-          aria-label={socialUrls?.linkedin ? "Reshare on LinkedIn" : "Share on LinkedIn"}
-          title={socialUrls?.linkedin ? "Reshare existing post" : "Share on LinkedIn"}
+          className={`${styles.shareButton} ${styles.linkedin} ${isReshare('linkedin') ? styles.reshare : ''}`}
+          aria-label={getAriaLabel('linkedin')}
+          title={getAriaLabel('linkedin')}
         >
           <div className={styles.shareIcon}></div>
         </button>
@@ -65,8 +40,8 @@ export default function FloatingSocialShare({ url, title, description, socialUrl
         <button
           onClick={() => handleShare('copy')}
           className={`${styles.shareButton} ${styles.copy} ${copied ? styles.copied : ''}`}
-          aria-label="Copy link"
-          title={copied ? 'Link copied!' : 'Copy link'}
+          aria-label={getAriaLabel('copy')}
+          title={getAriaLabel('copy')}
         >
           <div className={styles.shareIcon}></div>
         </button>
@@ -80,26 +55,30 @@ export default function FloatingSocialShare({ url, title, description, socialUrl
           <div className={styles.mobileShareButtons}>
             <button
               onClick={() => handleShare('twitter')}
-              className={`${styles.mobileShareButton} ${styles.twitter} ${socialUrls?.twitter ? styles.reshare : ''}`}
-              aria-label={socialUrls?.twitter ? "Retweet" : "Share on Twitter"}
+              className={`${styles.mobileShareButton} ${styles.twitter} ${isReshare('twitter') ? styles.reshare : ''}`}
+              aria-label={getAriaLabel('twitter')}
             >
               <div className={styles.shareIcon}></div>
-              <span className={styles.buttonText}>{socialUrls?.twitter ? "Retweet" : "Twitter"}</span>
+              <span className={styles.buttonText}>
+                {getButtonLabel('twitter', isReshare('twitter') ? 'reshare' : 'share')}
+              </span>
             </button>
 
             <button
               onClick={() => handleShare('linkedin')}
-              className={`${styles.mobileShareButton} ${styles.linkedin} ${socialUrls?.linkedin ? styles.reshare : ''}`}
-              aria-label={socialUrls?.linkedin ? "Reshare" : "Share on LinkedIn"}
+              className={`${styles.mobileShareButton} ${styles.linkedin} ${isReshare('linkedin') ? styles.reshare : ''}`}
+              aria-label={getAriaLabel('linkedin')}
             >
               <div className={styles.shareIcon}></div>
-              <span className={styles.buttonText}>{socialUrls?.linkedin ? "Reshare" : "LinkedIn"}</span>
+              <span className={styles.buttonText}>
+                {getButtonLabel('linkedin', isReshare('linkedin') ? 'reshare' : 'share')}
+              </span>
             </button>
 
             <button
               onClick={() => handleShare('copy')}
               className={`${styles.mobileShareButton} ${styles.copy} ${copied ? styles.copied : ''}`}
-              aria-label={copied ? 'Copied!' : 'Copy link'}
+              aria-label={getAriaLabel('copy')}
             >
               <div className={styles.shareIcon}></div>
               <span className={styles.buttonText}>{copied ? 'Copied!' : 'Copy'}</span>

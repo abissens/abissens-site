@@ -5,7 +5,6 @@ import styles from './layout.module.css';
 import {ThemeProvider} from '@/components/providers/ThemeContext';
 import { WebsiteStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
-import 'highlight.js/styles/github-dark-dimmed.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

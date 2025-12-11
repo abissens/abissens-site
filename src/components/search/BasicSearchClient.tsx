@@ -4,28 +4,13 @@ import { useState, useEffect, useCallback, useMemo, useTransition, memo } from '
 import { PostData } from '@/lib/posts';
 import PostList from '@/components/posts/post-list';
 import Pagination from '@/components/pagination/Pagination';
-import { useUrlPagination } from '@/hooks/useUrlPagination';
+import { usePagination, paginateItems } from '@/hooks/usePagination';
+import { useDebounce } from '@/hooks/useDebounce';
 import { useSearchParams } from 'next/navigation';
 import styles from './BasicSearch.module.scss';
 
 interface BasicSearchClientProps {
   posts: PostData[];
-}
-
-function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
 }
 
 const MemoizedPostList = memo(function SearchPostList({ posts }: { posts: PostData[] }) {
@@ -48,13 +33,20 @@ export default function BasicSearchClient({ posts }: BasicSearchClientProps) {
   const [filteredPosts, setFilteredPosts] = useState<PostData[]>(posts);
 
   const searchParams = useSearchParams();
-  const currentPage = useUrlPagination();
-
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
+  const { currentPage, totalPages, startIndex, endIndex } = usePagination({
+    totalItems: filteredPosts.length,
+    itemsPerPage: POSTS_PER_PAGE,
+  });
+
+  const currentPosts = useMemo(
+    () => paginateItems(filteredPosts, startIndex, endIndex),
+    [filteredPosts, startIndex, endIndex]
+  );
+
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
+    setSearchTerm(e.target.value);
   }, []);
 
   useEffect(() => {
@@ -88,12 +80,6 @@ export default function BasicSearchClient({ posts }: BasicSearchClientProps) {
       setFilteredPosts(filteredPostsMemo);
     });
   }, [filteredPostsMemo]);
-
-  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
-  const validCurrentPage = Math.min(Math.max(1, currentPage), Math.max(1, totalPages));
-  const startIndex = (validCurrentPage - 1) * POSTS_PER_PAGE;
-  const endIndex = startIndex + POSTS_PER_PAGE;
-  const currentPosts = filteredPosts.slice(startIndex, endIndex);
 
   const searchResultsText = useMemo(() => {
     if (isPending && searchTerm.trim()) {
@@ -164,7 +150,7 @@ export default function BasicSearchClient({ posts }: BasicSearchClientProps) {
         </div>
 
         <Pagination
-          currentPage={validCurrentPage}
+          currentPage={currentPage}
           totalPages={totalPages}
           useUrlPagination={true}
         />

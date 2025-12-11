@@ -5,11 +5,13 @@ import AuthorComponent from '@/components/posts/author';
 import TagList from '@/components/tags/TagList';
 import dynamic from 'next/dynamic';
 import styles from './page.module.scss';
+import PostFooter from '@/components/blog/PostFooter';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { BlogPostStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 import type { Metadata } from 'next';
+import 'highlight.js/styles/github-dark-dimmed.css';
 
 const FloatingSocialShare = dynamic(() => import('@/components/share/FloatingSocialShare'), {
     loading: () => <div style={{ minHeight: '200px' }} />
@@ -87,6 +89,7 @@ export default async function BlogPost({params}: { params: Promise<{ slug: strin
     }
     const {content, title, formattedDate, author, tags, summary, socialUrls} = post;
     const postUrl = `${metadataInf.url}/blog/${slug}`;
+    const { prev, next } = postBundle.getAdjacentPosts(slug);
 
     return (
         <div>
@@ -109,6 +112,7 @@ export default async function BlogPost({params}: { params: Promise<{ slug: strin
                 description={summary}
                 socialUrls={socialUrls}
             />
+            <PostFooter author={author} prevPost={prev} nextPost={next} />
         </div>
     );
 }

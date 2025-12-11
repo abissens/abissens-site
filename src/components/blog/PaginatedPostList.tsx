@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { PostData } from '@/lib/posts';
 import PostList from '@/components/posts/post-list';
 import Pagination from '@/components/pagination/Pagination';
-import { useUrlPagination } from '@/hooks/useUrlPagination';
+import { usePagination, paginateItems } from '@/hooks/usePagination';
 import styles from './PaginatedPostList.module.scss';
 
 interface PaginatedPostListProps {
@@ -18,26 +18,23 @@ export default function PaginatedPostList({
   postsPerPage = 6,
   enableUrlPagination = true
 }: PaginatedPostListProps) {
-  const urlPage = useUrlPagination();
-  const currentPage = enableUrlPagination ? urlPage : 1;
+  const { currentPage, totalPages, startIndex, endIndex } = usePagination({
+    totalItems: posts.length,
+    itemsPerPage: postsPerPage,
+    enableUrlPagination,
+  });
 
-  const totalPages = Math.ceil(posts.length / postsPerPage);
-
-  const validCurrentPage = Math.min(Math.max(1, currentPage), Math.max(1, totalPages));
-
-  const startIndex = (validCurrentPage - 1) * postsPerPage;
-  const endIndex = startIndex + postsPerPage;
-
-  const currentPosts = useMemo(() => {
-    return posts.slice(startIndex, endIndex);
-  }, [posts, startIndex, endIndex]);
+  const currentPosts = useMemo(
+    () => paginateItems(posts, startIndex, endIndex),
+    [posts, startIndex, endIndex]
+  );
 
   return (
     <div className={styles.paginatedPostList}>
       <PostList posts={currentPosts} />
 
       <Pagination
-        currentPage={validCurrentPage}
+        currentPage={currentPage}
         totalPages={totalPages}
         useUrlPagination={enableUrlPagination}
       />

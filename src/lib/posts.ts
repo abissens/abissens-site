@@ -70,6 +70,17 @@ class PostBundle {
         }));
     }
 
+    getAdjacentPosts(slug: string): { prev: PostData | null; next: PostData | null } {
+        const index = this.sortedPosts.findIndex(post => post.slug === slug);
+        if (index === -1) {
+            return { prev: null, next: null };
+        }
+        return {
+            prev: index < this.sortedPosts.length - 1 ? this.sortedPosts[index + 1] : null,
+            next: index > 0 ? this.sortedPosts[index - 1] : null,
+        };
+    }
+
     private buildTagIndex(posts: PostData[]): Record<string, PostData[]> {
         const index: Record<string, PostData[]> = {};
 
