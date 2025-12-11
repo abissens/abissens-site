@@ -6,12 +6,8 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem 0.75rem;
-  background: var(--floating-bg, rgba(255, 255, 255, 0.95));
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--floating-border, rgba(0, 0, 0, 0.1));
-  border-radius: 1rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
 
   @media (max-width: 1024px) {
     display: none;
@@ -19,45 +15,50 @@
 }
 
 .shareLabel {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--floating-label, #64748b);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted);
   text-align: center;
   margin-bottom: 0.25rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  opacity: 0.8;
 }
 
 .shareButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--floating-button-border, #e2e8f0);
-  border-radius: 0.75rem;
-  background: var(--floating-button-bg, #ffffff);
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--surface);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: background-color var(--transition-fast);
   position: relative;
 
   &:hover {
-    transform: translateY(-2px);
+    background: var(--border);
   }
 }
 
 .shareIcon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
+  background: var(--muted);
+  transition: background var(--transition-fast);
+}
+
+.shareButton:hover .shareIcon {
+  background: var(--text);
 }
 
 .mobileShareSection {
-  margin: 2rem 0;
-  padding: 0.5rem;
-  background: var(--mobile-share-bg, rgba(255, 255, 255, 0.95));
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--mobile-share-border, rgba(0, 0, 0, 0.1));
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
   display: none;
 
   @media (max-width: 1024px) {
@@ -69,20 +70,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  max-width: 100%;
+  gap: 1rem;
 }
 
 .mobileShareLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--mobile-label, #64748b);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
 .mobileShareButtons {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.25rem;
 }
 
 .mobileShareButton {
@@ -91,16 +93,16 @@
   align-items: center;
   gap: 0.25rem;
   padding: 0.5rem;
-  border: 1px solid var(--mobile-button-border, #e2e8f0);
-  border-radius: 0.5rem;
-  background: var(--mobile-button-bg, #ffffff);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  min-width: 60px;
+  transition: background-color var(--transition-fast);
+  min-width: 48px;
   position: relative;
 
   &:hover {
-    transform: translateY(-1px);
+    background: var(--surface);
   }
 
   .shareIcon {
@@ -109,188 +111,68 @@
   }
 }
 
+.mobileShareButton:hover .shareIcon {
+  background: var(--text);
+}
+
 .buttonText {
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--mobile-button-text, #64748b);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted);
   white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+.mobileShareButton:hover .buttonText {
+  color: var(--text);
 }
 
 .reshare {
-  &::before {
-    content: '↻';
+  &::after {
+    content: '';
     position: absolute;
-    top: -4px;
-    right: -4px;
-    width: 16px;
-    height: 16px;
-    background: var(--reshare-indicator, #22c55e);
-    color: white;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
     border-radius: 50%;
-    font-size: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    border: 2px solid white;
   }
 }
 
 .twitter {
-  &:hover {
-    background: var(--twitter-hover, #e0f2fe);
-    border-color: var(--twitter-border, #0ea5e9);
-  }
-
   .shareIcon {
-    background: var(--twitter-icon, #64748b);
     mask: url('/assets/x.svg') no-repeat center;
     mask-size: contain;
     -webkit-mask: url('/assets/x.svg') no-repeat center;
     -webkit-mask-size: contain;
   }
-
-  &:hover .shareIcon {
-    background: var(--twitter-icon-hover, #0284c7);
-  }
 }
 
 .linkedin {
-  &:hover {
-    background: var(--linkedin-hover, #eff6ff);
-    border-color: var(--linkedin-border, #2563eb);
-  }
-
   .shareIcon {
-    background: var(--linkedin-icon, #64748b);
     mask: url('/assets/linkedin.svg') no-repeat center;
     mask-size: contain;
     -webkit-mask: url('/assets/linkedin.svg') no-repeat center;
     -webkit-mask-size: contain;
   }
-
-  &:hover .shareIcon {
-    background: var(--linkedin-icon-hover, #1d4ed8);
-  }
 }
 
 .copy {
-  &:hover {
-    background: var(--copy-hover, #fef3f2);
-    border-color: var(--copy-border, #f97316);
-  }
-
-  &.copied {
-    background: var(--copied-bg, #f0fdf4);
-    border-color: var(--copied-border, #22c55e);
-
-    .shareIcon {
-      background: var(--copied-icon, #16a34a);
-    }
-  }
-
   .shareIcon {
-    background: var(--copy-icon, #64748b);
     mask: url('/assets/link.svg') no-repeat center;
     mask-size: contain;
     -webkit-mask: url('/assets/link.svg') no-repeat center;
     -webkit-mask-size: contain;
   }
 
-  &:hover .shareIcon {
-    background: var(--copy-icon-hover, #ea580c);
-  }
-}
-
-.mobileShareButton {
-  &.twitter:hover {
-    background: var(--twitter-hover-mobile, #e0f2fe);
-    border-color: var(--twitter-border-mobile, #0ea5e9);
+  &.copied {
+    .shareIcon {
+      background: var(--primary);
+    }
 
     .buttonText {
-      color: var(--twitter-text-mobile, #0284c7);
+      color: var(--primary);
     }
-  }
-
-  &.linkedin:hover {
-    background: var(--linkedin-hover-mobile, #eff6ff);
-    border-color: var(--linkedin-border-mobile, #2563eb);
-
-    .buttonText {
-      color: var(--linkedin-text-mobile, #1d4ed8);
-    }
-  }
-
-  &.copy:hover {
-    background: var(--copy-hover-mobile, #fef3f2);
-    border-color: var(--copy-border-mobile, #f97316);
-
-    .buttonText {
-      color: var(--copy-text-mobile, #ea580c);
-    }
-  }
-
-  &.copy.copied {
-    background: var(--copied-bg-mobile, #f0fdf4);
-    border-color: var(--copied-border-mobile, #22c55e);
-
-    .buttonText {
-      color: var(--copied-text-mobile, #16a34a);
-    }
-  }
-}
-
-:global(.dark) {
-  .floatingSidebar {
-    background: var(--floating-bg-dark, rgba(30, 41, 59, 0.95));
-    border-color: var(--floating-border-dark, rgba(255, 255, 255, 0.1));
-  }
-
-  .shareLabel {
-    color: var(--floating-label-dark, #94a3b8);
-  }
-
-  .shareButton {
-    background: var(--floating-button-bg-dark, #334155);
-    border-color: var(--floating-button-border-dark, #475569);
-
-  }
-
-  .mobileShareSection {
-    background: var(--mobile-share-bg-dark, rgba(30, 41, 59, 0.95));
-    border-color: var(--mobile-share-border-dark, rgba(255, 255, 255, 0.1));
-  }
-
-  .mobileShareLabel {
-    color: var(--mobile-label-dark, #94a3b8);
-  }
-
-  .mobileShareButton {
-    background: var(--mobile-button-bg-dark, #334155);
-    border-color: var(--mobile-button-border-dark, #475569);
-  }
-
-  .buttonText {
-    color: var(--mobile-button-text-dark, #cbd5e1);
-  }
-
-  .twitter:hover {
-    background: var(--twitter-hover-dark, #1e293b);
-    border-color: var(--twitter-border-dark, #38bdf8);
-  }
-
-  .linkedin:hover {
-    background: var(--linkedin-hover-dark, #1e293b);
-    border-color: var(--linkedin-border-dark, #60a5fa);
-  }
-
-  .copy:hover {
-    background: var(--copy-hover-dark, #1e293b);
-    border-color: var(--copy-border-dark, #fb923c);
-  }
-
-  .copy.copied {
-    background: var(--copied-bg-dark, #1e293b);
-    border-color: var(--copied-border-dark, #4ade80);
   }
 }
