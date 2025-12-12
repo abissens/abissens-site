@@ -112,7 +112,16 @@ export default async function BlogPost({params}: { params: Promise<{ slug: strin
                 description={summary}
                 socialUrls={socialUrls}
             />
-            <PostFooter author={author} prevPost={prev} nextPost={next} />
+            <PostFooter
+                author={author}
+                prevPost={prev}
+                nextPost={next}
+                gitUrl={socialUrls?.git}
+                shareUrl={postUrl}
+                shareTitle={title}
+                shareDescription={summary}
+                socialUrls={socialUrls}
+            />
         </div>
     );
 }

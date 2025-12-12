@@ -1,16 +1,76 @@
+'use client';
+
 import Link from 'next/link';
 import { Author, PostData } from '@/lib/posts';
+import { useShareActions } from '@/hooks/useShareActions';
 import styles from './PostFooter.module.scss';
 
 interface PostFooterProps {
   author?: Author;
   prevPost: PostData | null;
   nextPost: PostData | null;
+  gitUrl?: string;
+  shareUrl?: string;
+  shareTitle?: string;
+  shareDescription?: string;
+  socialUrls?: {
+    twitter?: string;
+    linkedin?: string;
+    git?: string;
+  };
 }
 
-export default function PostFooter({ author, prevPost, nextPost }: PostFooterProps) {
+export default function PostFooter({
+  author,
+  prevPost,
+  nextPost,
+  gitUrl,
+  shareUrl,
+  shareTitle,
+  shareDescription,
+  socialUrls
+}: PostFooterProps) {
+  const { copied, handleShare, getAriaLabel, isReshare } = useShareActions({
+    url: shareUrl || '',
+    title: shareTitle || '',
+    description: shareDescription || '',
+    socialUrls,
+  });
+
+  const hasShare = shareUrl && shareTitle;
+
   return (
     <footer className={styles.postFooter}>
+      {/* Mobile share section - only visible on small screens */}
+      {hasShare && (
+        <div className={styles.mobileShare}>
+          <span className={styles.mobileShareLabel}>Share</span>
+          <div className={styles.mobileShareButtons}>
+            <button
+              onClick={() => handleShare('twitter')}
+              className={`${styles.shareBtn} ${isReshare('twitter') ? styles.reshare : ''}`}
+              aria-label={getAriaLabel('twitter')}
+            >
+              <span className={styles.shareIcon} data-icon="x" />
+            </button>
+            <button
+              onClick={() => handleShare('linkedin')}
+              className={`${styles.shareBtn} ${isReshare('linkedin') ? styles.reshare : ''}`}
+              aria-label={getAriaLabel('linkedin')}
+            >
+              <span className={styles.shareIcon} data-icon="linkedin" />
+            </button>
+            <button
+              onClick={() => handleShare('copy')}
+              className={`${styles.shareBtn} ${copied ? styles.copied : ''}`}
+              aria-label={getAriaLabel('copy')}
+            >
+              <span className={styles.shareIcon} data-icon={copied ? 'check' : 'link'} />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className={styles.divider} />
 
       {author && (
@@ -39,6 +99,21 @@ export default function PostFooter({ author, prevPost, nextPost }: PostFooterPro
               </a>
             )}
           </div>
+          {gitUrl && (
+            <a href={gitUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceCodeLink}>
+              <span className={styles.sourceCodeIcon} />
+              <span>View source code</span>
+            </a>
+          )}
+        </div>
+      )}
+
+      {!author && gitUrl && (
+        <div className={styles.sourceCodeOnly}>
+          <a href={gitUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceCodeLink}>
+            <span className={styles.sourceCodeIcon} />
+            <span>View source code</span>
+          </a>
         </div>
       )}
 
@@ -46,7 +121,7 @@ export default function PostFooter({ author, prevPost, nextPost }: PostFooterPro
         <div className={styles.navItem}>
           {prevPost && (
             <Link href={`/blog/${prevPost.slug}`} className={styles.navLink}>
-              <span className={styles.navLabel}>← Previous</span>
+              <span className={styles.navLabel}>Previous</span>
               <span className={styles.navTitle}>{prevPost.title}</span>
             </Link>
           )}
@@ -55,7 +130,7 @@ export default function PostFooter({ author, prevPost, nextPost }: PostFooterPro
         <div className={`${styles.navItem} ${styles.navItemNext}`}>
           {nextPost && (
             <Link href={`/blog/${nextPost.slug}`} className={styles.navLink}>
-              <span className={styles.navLabel}>Next →</span>
+              <span className={styles.navLabel}>Next</span>
               <span className={styles.navTitle}>{nextPost.title}</span>
             </Link>
           )}

@@ -1,3 +1,4 @@
+// Desktop floating sidebar - only visible on large screens
 .floatingSidebar {
   position: fixed;
   left: 20px;
@@ -55,84 +56,12 @@
   background: var(--text);
 }
 
-.mobileShareSection {
-  margin: 1.5rem 0;
-  padding: 1rem 0;
-  border-top: 1px solid var(--border);
-  display: none;
-
-  @media (max-width: 1024px) {
-    display: block;
-  }
-}
-
-.mobileShareContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.mobileShareLabel {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-
-.mobileShareButtons {
-  display: flex;
-  gap: 0.25rem;
-}
-
-.mobileShareButton {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem;
-  border: none;
-  border-radius: var(--radius-md);
-  background: transparent;
-  cursor: pointer;
-  transition: background-color var(--transition-fast);
-  min-width: 48px;
-  position: relative;
-
-  &:hover {
-    background: var(--surface);
-  }
-
-  .shareIcon {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-.mobileShareButton:hover .shareIcon {
-  background: var(--text);
-}
-
-.buttonText {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--muted);
-  white-space: nowrap;
-  transition: color var(--transition-fast);
-}
-
-.mobileShareButton:hover .buttonText {
-  color: var(--text);
-}
-
 .reshare {
   &::after {
     content: '';
     position: absolute;
-    top: 0.25rem;
-    right: 0.25rem;
+    top: 4px;
+    right: 4px;
     width: 6px;
     height: 6px;
     background: var(--primary);
@@ -169,10 +98,6 @@
   &.copied {
     .shareIcon {
       background: var(--primary);
-    }
-
-    .buttonText {
-      color: var(--primary);
     }
   }
 }

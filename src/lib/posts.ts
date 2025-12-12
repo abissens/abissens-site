@@ -28,6 +28,7 @@ export interface PostData {
     socialUrls?: {
         twitter?: string;
         linkedin?: string;
+        git?: string;
     };
 }
 
@@ -170,11 +171,12 @@ class PostBundle {
                      typeof data.tags === 'string' ? data.tags.split(',').map((t: string) => t.trim()) :
                      [];
 
-        let socialUrls: { twitter?: string; linkedin?: string } | undefined;
-        if (data.twitter || data.linkedin) {
+        let socialUrls: { twitter?: string; linkedin?: string; git?: string } | undefined;
+        if (data.twitter || data.linkedin || data.git) {
             socialUrls = {
                 twitter: data.twitter,
                 linkedin: data.linkedin,
+                git: data.git,
             };
         }
 
