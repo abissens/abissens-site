@@ -11,12 +11,12 @@ import styles from './page.module.scss';
 
 export const metadata: Metadata = {
   title: `About | ${metadataInf.siteName}`,
-  description: 'Learn about Abissens - a developer who writes code and shares thoughts on software development without oversimplified metaphors.',
+  description: 'A developer writing about software development, design patterns, and tools.',
   openGraph: {
     type: 'website',
     url: `${metadataInf.url}/about`,
     title: `About | ${metadataInf.siteName}`,
-    description: 'Learn about Abissens - a developer who writes code and shares thoughts on software development without oversimplified metaphors.',
+    description: 'A developer writing about software development, design patterns, and tools.',
     siteName: metadataInf.siteName,
     locale: 'en_US',
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `About | ${metadataInf.siteName}`,
-    description: 'Learn about Abissens - a developer who writes code and shares thoughts on software development without oversimplified metaphors.',
+    description: 'A developer writing about software development, design patterns, and tools.',
     images: ['/assets/og-image.png'],
   },
   alternates: {
@@ -62,27 +62,15 @@ export default async function About() {
                 sameAs={['https://github.com/abissens', 'https://twitter.com/abissens', 'https://www.linkedin.com/in/hichem-ben-sassi-5ab200224/']}
             />
 
-            <div className={styles.decorativeElement}></div>
-
-
             <main className={styles.aboutContent}>
                 <MDXRemote source={content} options={mdOptions}/>
             </main>
 
-            <footer className={styles.socialLinks}>
-                <Link href="https://github.com/abissens" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
-                    <span>GitHub</span>
-                </Link>
-                <Link href="https://twitter.com/abissens" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
-                    <span>Twitter</span>
-                </Link>
-                <Link href="https://www.linkedin.com/in/hichem-ben-sassi-5ab200224/" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
-                    <span>LinkedIn</span>
-                </Link>
-                <Link href="/blog" className={styles.socialLink}>
-                    <span>Blog</span>
-                </Link>
-            </footer>
+            <div className={styles.socialLinks}>
+                <Link href="https://github.com/abissens" target="_blank" rel="noopener noreferrer">GitHub</Link>
+                <Link href="https://twitter.com/abissens" target="_blank" rel="noopener noreferrer">Twitter</Link>
+                <Link href="https://www.linkedin.com/in/hichem-ben-sassi-5ab200224/" target="_blank" rel="noopener noreferrer">LinkedIn</Link>
+            </div>
         </div>
     );
 }

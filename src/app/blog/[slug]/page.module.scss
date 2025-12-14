@@ -1,7 +1,7 @@
 
 .postHeader {
   margin: 35px 0;
-  
+
   .postTitle {
     text-align: center;
     font-size: 1.5rem;
@@ -30,6 +30,11 @@
       margin-left: 15px;
     }
   }
+
+  .tags {
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
 }
 
 .postContent {
@@ -39,8 +44,11 @@
 
   margin: 5px 10px;
 
-  @media (max-width: 768px) {
+  :global(p) {
+    margin: 1rem 0;
+  }
 
+  @media (max-width: 768px) {
     margin: 5px 25px;
   }
 }

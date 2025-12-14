@@ -2,28 +2,20 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: center;
+  align-items: baseline;
   padding: 1rem 0;
 }
 
 .tag {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0;
   text-decoration: none;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: all 0.2s ease-in-out;
-
-  background-color: var(--tag-bg, #f8fafc);
-  color: var(--tag-color, #64748b);
-  border: 2px solid var(--tag-border, #e2e8f0);
+  font-weight: var(--font-weight-medium);
+  color: var(--muted);
+  transition: color var(--transition-fast);
 
   &:hover {
-    background-color: var(--tag-hover-bg, #3b82f6);
-    color: var(--tag-hover-color, white);
-    border-color: var(--tag-hover-border, #3b82f6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    color: var(--primary);
   }
 
   &.xsmall {
@@ -45,22 +37,4 @@
   &.xlarge {
     font-size: 1.25rem;
   }
-}
-
-:global(.dark) .tag {
-  --tag-bg: #1e293b;
-  --tag-color: #cbd5e1;
-  --tag-border: #475569;
-  --tag-hover-bg: #3b82f6;
-  --tag-hover-color: white;
-  --tag-hover-border: #3b82f6;
-}
-
-:global(.light) .tag {
-  --tag-bg: #f8fafc;
-  --tag-color: #64748b;
-  --tag-border: #e2e8f0;
-  --tag-hover-bg: #3b82f6;
-  --tag-hover-color: white;
-  --tag-hover-border: #3b82f6;
 }

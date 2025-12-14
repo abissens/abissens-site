@@ -27,7 +27,7 @@ const nextConfig = {
     },
     experimental: {
         optimizePackageImports: ['highlight.js']
-    }
+    },
 };
 
 export default withBundleAnalyzer(withMDX(nextConfig));

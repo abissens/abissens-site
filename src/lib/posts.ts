@@ -161,7 +161,7 @@ class PostBundle {
             } else if (section === 1) {
                 summary += `${trimmedLine}\n`;
             } else if (section === 2) {
-                content += `${trimmedLine}\n`;
+                content += `${line}\n`;
             }
         }
         const {data} = matter(`---\n${matterContent}\n---`);
@@ -219,4 +219,16 @@ class PostBundle {
 
 const postsDirectory = path.join(process.cwd(), 'src', 'posts');
 
-export const postBundle = new PostBundle(postsDirectory);
+// In dev mode, always create fresh bundle to pick up MD changes
+// In production, cache the bundle for performance
+const createBundle = () => new PostBundle(postsDirectory);
+
+const productionBundle = process.env.NODE_ENV === 'production' ? createBundle() : null;
+
+export const postBundle = new Proxy({} as PostBundle, {
+    get(_, prop: keyof PostBundle) {
+        const bundle = productionBundle ?? createBundle();
+        const value = bundle[prop];
+        return typeof value === 'function' ? value.bind(bundle) : value;
+    }
+});
