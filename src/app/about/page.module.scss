@@ -20,18 +20,53 @@
 
 .socialLinks {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 
   a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &:hover {
-      color: var(--primary);
+    &:hover .socialIcon {
+      background: var(--text);
     }
   }
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  background: var(--muted);
+  transition: background var(--transition-fast);
+}
+
+.github {
+  mask: url('/assets/github.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url('/assets/github.svg') no-repeat center;
+  -webkit-mask-size: contain;
+}
+
+.x {
+  mask: url('/assets/x.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url('/assets/x.svg') no-repeat center;
+  -webkit-mask-size: contain;
+}
+
+.linkedin {
+  mask: url('/assets/linkedin.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url('/assets/linkedin.svg') no-repeat center;
+  -webkit-mask-size: contain;
+}
+
+.email {
+  mask: url('/assets/email.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url('/assets/email.svg') no-repeat center;
+  -webkit-mask-size: contain;
 }

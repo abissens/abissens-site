@@ -1,0 +1,16 @@
+.diagram {
+    margin: var(--spacing-6) 0;
+    text-align: center;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+}
+
+.caption {
+    margin-top: var(--spacing-3);
+    font-size: var(--font-size-sm);
+    color: var(--muted);
+    font-style: italic;
+}

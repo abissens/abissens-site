@@ -4,9 +4,10 @@ import {PostData} from '@/lib/posts';
 
 interface PostListProps {
     posts: PostData[];
+    basePath?: string;
 }
 
-const PostList: React.FC<PostListProps> = ({posts}) => {
+const PostList: React.FC<PostListProps> = ({posts, basePath = '/blog'}) => {
     return (
         <div className={styles.postList + ' grid'}>
             {posts.map((post, index) => (
@@ -20,6 +21,7 @@ const PostList: React.FC<PostListProps> = ({posts}) => {
                     summary={post.summary}
                     author={post.author}
                     tags={post.tags}
+                    basePath={basePath}
                 />
                 </div>
             ))}

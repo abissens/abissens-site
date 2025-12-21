@@ -6,6 +6,7 @@ import * as fs from 'node:fs';
 import Link from 'next/link';
 import { PersonStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
+import { postBundle } from '@/lib/posts';
 import type { Metadata } from 'next';
 import styles from './page.module.scss';
 
@@ -53,13 +54,16 @@ const mdOptions = {
 export default async function About() {
     const aboutPath = path.join(process.cwd(), 'src', 'posts', '.about.md');
     const content = fs.readFileSync(aboutPath, 'utf-8');
+    const author = postBundle.getAuthor('Abissens');
+
+    const sameAs = [author?.github, author?.x, author?.linkedin].filter(Boolean) as string[];
 
     return (
         <div className={styles.aboutPage}>
             <PersonStructuredData
                 name="Abissens"
                 url={metadataInf.url}
-                sameAs={['https://github.com/abissens', 'https://twitter.com/abissens', 'https://www.linkedin.com/in/hichem-ben-sassi-5ab200224/']}
+                sameAs={sameAs}
             />
 
             <main className={styles.aboutContent}>
@@ -67,9 +71,26 @@ export default async function About() {
             </main>
 
             <div className={styles.socialLinks}>
-                <Link href="https://github.com/abissens" target="_blank" rel="noopener noreferrer">GitHub</Link>
-                <Link href="https://twitter.com/abissens" target="_blank" rel="noopener noreferrer">Twitter</Link>
-                <Link href="https://www.linkedin.com/in/hichem-ben-sassi-5ab200224/" target="_blank" rel="noopener noreferrer">LinkedIn</Link>
+                {author?.github && (
+                    <Link href={author.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <span className={`${styles.socialIcon} ${styles.github}`} />
+                    </Link>
+                )}
+                {author?.x && (
+                    <Link href={author.x} target="_blank" rel="noopener noreferrer" aria-label="X">
+                        <span className={`${styles.socialIcon} ${styles.x}`} />
+                    </Link>
+                )}
+                {author?.linkedin && (
+                    <Link href={author.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <span className={`${styles.socialIcon} ${styles.linkedin}`} />
+                    </Link>
+                )}
+                {author?.email && (
+                    <Link href={`mailto:${author.email}`} aria-label="Email">
+                        <span className={`${styles.socialIcon} ${styles.email}`} />
+                    </Link>
+                )}
             </div>
         </div>
     );

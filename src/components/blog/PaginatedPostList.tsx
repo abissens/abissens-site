@@ -11,27 +11,36 @@ interface PaginatedPostListProps {
   posts: PostData[];
   postsPerPage?: number;
   enableUrlPagination?: boolean;
+  showDrafts?: boolean;
+  basePath?: string;
 }
 
 export default function PaginatedPostList({
   posts,
   postsPerPage = 6,
-  enableUrlPagination = true
+  enableUrlPagination = true,
+  showDrafts = false,
+  basePath = '/blog'
 }: PaginatedPostListProps) {
+  const filteredPosts = useMemo(
+    () => showDrafts ? posts : posts.filter(post => !post.tags.includes('preview')),
+    [posts, showDrafts]
+  );
+
   const { currentPage, totalPages, startIndex, endIndex } = usePagination({
-    totalItems: posts.length,
+    totalItems: filteredPosts.length,
     itemsPerPage: postsPerPage,
     enableUrlPagination,
   });
 
   const currentPosts = useMemo(
-    () => paginateItems(posts, startIndex, endIndex),
-    [posts, startIndex, endIndex]
+    () => paginateItems(filteredPosts, startIndex, endIndex),
+    [filteredPosts, startIndex, endIndex]
   );
 
   return (
     <div className={styles.paginatedPostList}>
-      <PostList posts={currentPosts} />
+      <PostList posts={currentPosts} basePath={basePath} />
 
       <Pagination
         currentPage={currentPage}

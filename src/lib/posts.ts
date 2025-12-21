@@ -26,7 +26,7 @@ export interface PostData {
     author: Author | undefined;
     tags: string[];
     socialUrls?: {
-        twitter?: string;
+        x?: string;
         linkedin?: string;
         git?: string;
     };
@@ -80,6 +80,10 @@ class PostBundle {
             prev: index < this.sortedPosts.length - 1 ? this.sortedPosts[index + 1] : null,
             next: index > 0 ? this.sortedPosts[index - 1] : null,
         };
+    }
+
+    getAuthor(name: string): Author | undefined {
+        return this.authors[name.toLowerCase()];
     }
 
     private buildTagIndex(posts: PostData[]): Record<string, PostData[]> {
@@ -171,10 +175,10 @@ class PostBundle {
                      typeof data.tags === 'string' ? data.tags.split(',').map((t: string) => t.trim()) :
                      [];
 
-        let socialUrls: { twitter?: string; linkedin?: string; git?: string } | undefined;
-        if (data.twitter || data.linkedin || data.git) {
+        let socialUrls: { x?: string; linkedin?: string; git?: string } | undefined;
+        if (data.x || data.linkedin || data.git) {
             socialUrls = {
-                twitter: data.twitter,
+                x: data.x,
                 linkedin: data.linkedin,
                 git: data.git,
             };

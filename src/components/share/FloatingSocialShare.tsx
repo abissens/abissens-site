@@ -18,10 +18,10 @@ export default function FloatingSocialShare({ url, title, description, socialUrl
       <div className={styles.shareLabel}>Share</div>
 
       <button
-        onClick={() => handleShare('twitter')}
-        className={`${styles.shareButton} ${styles.twitter} ${isReshare('twitter') ? styles.reshare : ''}`}
-        aria-label={getAriaLabel('twitter')}
-        title={getAriaLabel('twitter')}
+        onClick={() => handleShare('x')}
+        className={`${styles.shareButton} ${styles.x} ${isReshare('x') ? styles.reshare : ''}`}
+        aria-label={getAriaLabel('x')}
+        title={getAriaLabel('x')}
       >
         <div className={styles.shareIcon}></div>
       </button>

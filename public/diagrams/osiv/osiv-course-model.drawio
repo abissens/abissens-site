@@ -1,0 +1,223 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.9">
+  <diagram name="OSIV Architecture - Order Entity" id="qQYf_og4Lhdcsm5n0PdB">
+    <mxGraphModel dx="1226" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PJMwost3DSrPpnznMF8v-167" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=2;dashed=1;dashPattern=8 8;" value="" vertex="1">
+          <mxGeometry height="200" width="790" x="640" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-168" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontStyle=2;" value="OSIV Session Boundary" vertex="1">
+          <mxGeometry height="20" width="150" x="650" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-169" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="GET /orders/1" vertex="1">
+          <mxGeometry height="40" width="100" x="520" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-170" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="OrderController&#xa;+ OrderApiMapper" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-171" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="OrderService&#xa;(no @Transactional)" vertex="1">
+          <mxGeometry height="50" width="130" x="820" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-172" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="OrderRepositoryImpl&#xa;+ OrderMapper" vertex="1">
+          <mxGeometry height="50" width="130" x="990" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-173" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="OrderJpaRepository" vertex="1">
+          <mxGeometry height="40" width="120" x="1160" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-174" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="H2 DB" vertex="1">
+          <mxGeometry height="60" width="60" x="1320" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-175" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;" value="OrderResponse" vertex="1">
+          <mxGeometry height="15" width="80" x="660" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-176" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;" value="Order (domain)" vertex="1">
+          <mxGeometry height="15" width="80" x="835" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-177" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;" value="Order (domain)" vertex="1">
+          <mxGeometry height="15" width="80" x="1000" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-178" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;" value="OrderJpaEntity" vertex="1">
+          <mxGeometry height="15" width="80" x="1180" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-181" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="980" as="sourcePoint" />
+            <mxPoint x="660" y="980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-182" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="780" y="975" as="sourcePoint" />
+            <mxPoint x="820" y="975" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-183" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="950" y="975" as="sourcePoint" />
+            <mxPoint x="990" y="975" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-184" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1120" y="975" as="sourcePoint" />
+            <mxPoint x="1160" y="975" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-185" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1280" y="975" as="sourcePoint" />
+            <mxPoint x="1320" y="975" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-186" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="280" width="350" x="520" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-187" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Domain Layer (POJOs)" vertex="1">
+          <mxGeometry height="20" width="180" x="530" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-188" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=left;spacingLeft=5;" value="Order&#xa;&#xa;- id: Long&#xa;- customerId: Long&#xa;- createdAt: Instant&#xa;- status: OrderStatus&#xa;- orderLines: List&#xa;- notes: List" vertex="1">
+          <mxGeometry height="120" width="130" x="540" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-189" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=left;spacingLeft=5;" value="OrderLine&#xa;&#xa;- id: Long&#xa;- productId: Long&#xa;- quantity: int&#xa;- unitPrice: BigDecimal" vertex="1">
+          <mxGeometry height="90" width="140" x="710" y="1145" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-190" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=left;spacingLeft=5;" value="OrderNote&#xa;&#xa;- id: Long&#xa;- content: String&#xa;- author: String&#xa;- createdAt: Instant" vertex="1">
+          <mxGeometry height="90" width="140" x="710" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-191" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="1:N">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="670" y="1190" as="sourcePoint" />
+            <mxPoint x="710" y="1190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-192" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="1:N">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="670" y="1260" as="sourcePoint" />
+            <mxPoint x="710" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-193" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="280" width="120" x="900" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-194" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Mappers" vertex="1">
+          <mxGeometry height="20" width="120" x="900" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-195" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=center;" value="OrderMapper&#xa;toDomain()&#xa;toJpa()" vertex="1">
+          <mxGeometry height="55" width="90" x="915" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-196" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=center;" value="OrderLineMapper&#xa;toDomain()&#xa;toJpa()" vertex="1">
+          <mxGeometry height="55" width="90" x="915" y="1220" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-197" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=center;" value="OrderNoteMapper&#xa;toDomain()&#xa;toJpa()" vertex="1">
+          <mxGeometry height="55" width="90" x="915" y="1290" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-198" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=3;" value="LAZY LOAD&#xa;triggered here!" vertex="1">
+          <mxGeometry height="30" width="100" x="910" y="1355" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-199" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="280" width="380" x="1050" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-200" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="JPA Layer (Hibernate Entities)" vertex="1">
+          <mxGeometry height="20" width="220" x="1060" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-201" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=left;spacingLeft=5;" value="OrderJpaEntity&#xa;&#xa;- id: Long&#xa;- customerId: Long&#xa;- createdAt: Instant&#xa;- status: OrderStatus" vertex="1">
+          <mxGeometry height="95" width="130" x="1070" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-202" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#c0c0c0;strokeColor=#000000;fontSize=10;align=center;" value="@OneToMany(LAZY)&#xa;List&lt;OrderLineJpa&gt;" vertex="1">
+          <mxGeometry height="40" width="130" x="1070" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-203" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#c0c0c0;strokeColor=#000000;fontSize=10;align=center;" value="@OneToMany(LAZY)&#xa;List&lt;OrderNoteJpa&gt;" vertex="1">
+          <mxGeometry height="40" width="130" x="1070" y="1305" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-204" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=left;spacingLeft=5;" value="OrderLineJpaEntity&#xa;&#xa;- id: Long&#xa;- quantity: int&#xa;- unitPrice: BigDecimal" vertex="1">
+          <mxGeometry height="80" width="140" x="1240" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-205" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#c0c0c0;strokeColor=#000000;fontSize=10;align=center;" value="@ManyToOne(LAZY)&#xa;ProductJpaEntity" vertex="1">
+          <mxGeometry height="40" width="140" x="1240" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-206" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=10;align=left;spacingLeft=5;" value="OrderNoteJpaEntity&#xa;&#xa;- id: Long&#xa;- content: String&#xa;- author: String" vertex="1">
+          <mxGeometry height="80" width="140" x="1240" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-207" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1200" y="1275" as="sourcePoint" />
+            <mxPoint x="1240" y="1190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-208" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#000000;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1200" y="1325" as="sourcePoint" />
+            <mxPoint x="1240" y="1340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-209" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="N+1" vertex="1">
+          <mxGeometry height="20" width="40" x="1200" y="1180" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-210" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="N+1" vertex="1">
+          <mxGeometry height="20" width="40" x="1380" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-211" edge="1" parent="1" source="PJMwost3DSrPpnznMF8v-186" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;dashed=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="870" y="1210" as="sourcePoint" />
+            <mxPoint x="915" y="1177" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-212" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1005" y="1177" as="sourcePoint" />
+            <mxPoint x="1070" y="1197" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-213" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="1190" as="sourcePoint" />
+            <mxPoint x="915" y="1247" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-214" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1005" y="1247" as="sourcePoint" />
+            <mxPoint x="1070" y="1275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-215" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="1300" as="sourcePoint" />
+            <mxPoint x="915" y="1317" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-216" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1005" y="1317" as="sourcePoint" />
+            <mxPoint x="1070" y="1325" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-231" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="Connection pool congestion" vertex="1">
+          <mxGeometry height="40" width="110" x="670" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-232" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="Hidden N+1 Issues" vertex="1">
+          <mxGeometry height="40" width="110" x="860" y="1400" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-233" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="Multibag issues" vertex="1">
+          <mxGeometry height="40" width="110" x="850" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-234" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="Lazy init issues" vertex="1">
+          <mxGeometry height="40" width="110" x="1005" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-251" parent="1" style="shape=waypoint;sketch=0;fillStyle=solid;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;strokeWidth=6;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="660" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-252" parent="1" style="shape=waypoint;sketch=0;fillStyle=solid;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;strokeWidth=6;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="841" y="1023" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-253" parent="1" style="shape=waypoint;sketch=0;fillStyle=solid;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;strokeWidth=6;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="1000" y="1023" as="geometry" />
+        </mxCell>
+        <mxCell id="PJMwost3DSrPpnznMF8v-254" parent="1" style="shape=waypoint;sketch=0;fillStyle=solid;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;strokeWidth=6;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="850" y="1390" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

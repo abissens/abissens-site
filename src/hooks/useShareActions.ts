@@ -7,7 +7,7 @@ export interface ShareConfig {
   title: string;
   description?: string;
   socialUrls?: {
-    twitter?: string;
+    x?: string;
     linkedin?: string;
   };
 }
@@ -15,13 +15,13 @@ export interface ShareConfig {
 export interface ShareActions {
   copied: boolean;
   shareLinks: {
-    twitter: string;
+    x: string;
     linkedin: string;
   };
-  handleShare: (platform: 'twitter' | 'linkedin' | 'copy') => void;
-  getButtonLabel: (platform: 'twitter' | 'linkedin', action: 'share' | 'reshare') => string;
-  getAriaLabel: (platform: 'twitter' | 'linkedin' | 'copy') => string;
-  isReshare: (platform: 'twitter' | 'linkedin') => boolean;
+  handleShare: (platform: 'x' | 'linkedin' | 'copy') => void;
+  getButtonLabel: (platform: 'x' | 'linkedin', action: 'share' | 'reshare') => string;
+  getAriaLabel: (platform: 'x' | 'linkedin' | 'copy') => string;
+  isReshare: (platform: 'x' | 'linkedin') => boolean;
 }
 
 export function useShareActions({ url, title, description, socialUrls }: ShareConfig): ShareActions {
@@ -34,11 +34,11 @@ export function useShareActions({ url, title, description, socialUrls }: ShareCo
   }), [url, title, description]);
 
   const shareLinks = useMemo(() => ({
-    twitter: socialUrls?.twitter || `https://twitter.com/intent/tweet?url=${shareData.url}&text=${shareData.title}`,
+    x: socialUrls?.x || `https://x.com/intent/tweet?url=${shareData.url}&text=${shareData.title}`,
     linkedin: socialUrls?.linkedin || `https://www.linkedin.com/sharing/share-offsite/?url=${shareData.url}`,
   }), [socialUrls, shareData]);
 
-  const handleShare = useCallback((platform: 'twitter' | 'linkedin' | 'copy') => {
+  const handleShare = useCallback((platform: 'x' | 'linkedin' | 'copy') => {
     if (platform === 'copy') {
       navigator.clipboard.writeText(url).then(() => {
         setCopied(true);
@@ -49,25 +49,25 @@ export function useShareActions({ url, title, description, socialUrls }: ShareCo
     }
   }, [url, shareLinks]);
 
-  const isReshare = useCallback((platform: 'twitter' | 'linkedin') => {
-    return platform === 'twitter' ? !!socialUrls?.twitter : !!socialUrls?.linkedin;
+  const isReshare = useCallback((platform: 'x' | 'linkedin') => {
+    return platform === 'x' ? !!socialUrls?.x : !!socialUrls?.linkedin;
   }, [socialUrls]);
 
-  const getButtonLabel = useCallback((platform: 'twitter' | 'linkedin', action: 'share' | 'reshare') => {
+  const getButtonLabel = useCallback((platform: 'x' | 'linkedin', action: 'share' | 'reshare') => {
     const labels = {
-      twitter: { share: 'Twitter', reshare: 'Retweet' },
+      x: { share: 'X', reshare: 'Repost' },
       linkedin: { share: 'LinkedIn', reshare: 'Reshare' },
     };
     return labels[platform][action];
   }, []);
 
-  const getAriaLabel = useCallback((platform: 'twitter' | 'linkedin' | 'copy') => {
+  const getAriaLabel = useCallback((platform: 'x' | 'linkedin' | 'copy') => {
     if (platform === 'copy') {
       return copied ? 'Link copied!' : 'Copy link';
     }
     const isReshareAction = isReshare(platform);
     const labels = {
-      twitter: isReshareAction ? 'Retweet on Twitter' : 'Share on Twitter',
+      x: isReshareAction ? 'Repost on X' : 'Share on X',
       linkedin: isReshareAction ? 'Reshare on LinkedIn' : 'Share on LinkedIn',
     };
     return labels[platform];

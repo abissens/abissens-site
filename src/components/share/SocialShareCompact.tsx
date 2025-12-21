@@ -9,7 +9,7 @@ interface SocialShareCompactProps {
   description?: string;
   className?: string;
   socialUrls?: {
-    twitter?: string;
+    x?: string;
     linkedin?: string;
   };
 }
@@ -24,7 +24,7 @@ export default function SocialShareCompact({ url, title, description, className,
   };
 
   const shareLinks = {
-    twitter: socialUrls?.twitter || `https://twitter.com/intent/tweet?url=${shareData.url}&text=${shareData.title}`,
+    x: socialUrls?.x || `https://x.com/intent/tweet?url=${shareData.url}&text=${shareData.title}`,
     linkedin: socialUrls?.linkedin || `https://www.linkedin.com/sharing/share-offsite/?url=${shareData.url}`,
   };
 
@@ -42,10 +42,10 @@ export default function SocialShareCompact({ url, title, description, className,
   return (
     <div className={`${styles.socialShareCompact} ${className || ''}`}>
       <button
-        onClick={() => handleShare('twitter')}
-        className={`${styles.shareButton} ${styles.twitter} ${socialUrls?.twitter ? styles.reshare : ''}`}
-        aria-label={socialUrls?.twitter ? "Retweet on Twitter" : "Share on Twitter"}
-        title={socialUrls?.twitter ? "Retweet existing post" : "Share on Twitter"}
+        onClick={() => handleShare('x')}
+        className={`${styles.shareButton} ${styles.x} ${socialUrls?.x ? styles.reshare : ''}`}
+        aria-label={socialUrls?.x ? "Repost on X" : "Share on X"}
+        title={socialUrls?.x ? "Repost existing post" : "Share on X"}
       >
         <div className={styles.shareIcon}></div>
       </button>

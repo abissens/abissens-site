@@ -8,9 +8,11 @@ import { metadataInf } from '@/components/metadata';
 import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
-  return postBundle.getAllTags().map(tag => ({
-    tag: encodeURIComponent(tag),
-  }));
+  return postBundle.getAllTags()
+    .filter(tag => tag !== 'preview')
+    .map(tag => ({
+      tag: encodeURIComponent(tag),
+    }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {

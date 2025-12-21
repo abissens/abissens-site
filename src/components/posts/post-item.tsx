@@ -12,13 +12,15 @@ interface PostItemProps {
   summary: string;
   author: Author | undefined;
   tags: string[];
+  basePath?: string;
 }
 
-export default function PostItem({ title, slug, formattedDate, summary, author, tags }: PostItemProps) {
+export default function PostItem({ title, slug, formattedDate, summary, author, tags, basePath = '/blog' }: PostItemProps) {
+  const postUrl = `${basePath}/${slug}`;
   return (
     <div className={styles.postItem}>
       <div>
-        <Link className={styles.postTitleLink} href={`/blog/${slug}`}>
+        <Link className={styles.postTitleLink} href={postUrl}>
           <h2 className={styles.postTitle}>{title}</h2>
         </Link>
         <div className={styles.postHead}>
@@ -31,7 +33,7 @@ export default function PostItem({ title, slug, formattedDate, summary, author, 
 
         <div className={styles.postSummary}>
           <PostSummary summary={summary} />
-          <Link className={styles.readMoreLink} href={`/blog/${slug}`}>read more</Link>
+          <Link className={styles.readMoreLink} href={postUrl}>read more</Link>
         </div>
       </div>
     </div>

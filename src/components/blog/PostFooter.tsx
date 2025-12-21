@@ -14,7 +14,7 @@ interface PostFooterProps {
   shareTitle?: string;
   shareDescription?: string;
   socialUrls?: {
-    twitter?: string;
+    x?: string;
     linkedin?: string;
     git?: string;
   };
@@ -47,9 +47,9 @@ export default function PostFooter({
           <span className={styles.mobileShareLabel}>Share</span>
           <div className={styles.mobileShareButtons}>
             <button
-              onClick={() => handleShare('twitter')}
-              className={`${styles.shareBtn} ${isReshare('twitter') ? styles.reshare : ''}`}
-              aria-label={getAriaLabel('twitter')}
+              onClick={() => handleShare('x')}
+              className={`${styles.shareBtn} ${isReshare('x') ? styles.reshare : ''}`}
+              aria-label={getAriaLabel('x')}
             >
               <span className={styles.shareIcon} data-icon="x" />
             </button>

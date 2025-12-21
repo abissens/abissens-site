@@ -50,14 +50,14 @@
   }
 }
 
-.twitter {
+.x {
   &:hover {
-    background: var(--twitter-hover, #e0f2fe);
-    border-color: var(--twitter-border, #0ea5e9);
+    background: var(--x-hover, #e0f2fe);
+    border-color: var(--x-border, #0ea5e9);
   }
 
   .shareIcon {
-    background: var(--twitter-icon, #64748b);
+    background: var(--x-icon, #64748b);
     mask: url('/assets/x.svg') no-repeat center;
     mask-size: contain;
     -webkit-mask: url('/assets/x.svg') no-repeat center;
@@ -65,7 +65,7 @@
   }
 
   &:hover .shareIcon {
-    background: var(--twitter-icon-hover, #0284c7);
+    background: var(--x-icon-hover, #0284c7);
   }
 }
 
@@ -127,9 +127,9 @@
     }
   }
 
-  .twitter:hover {
-    background: var(--twitter-hover-dark, #1e293b);
-    border-color: var(--twitter-border-dark, #38bdf8);
+  .x:hover {
+    background: var(--x-hover-dark, #1e293b);
+    border-color: var(--x-border-dark, #38bdf8);
   }
 
   .linkedin:hover {

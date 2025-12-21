@@ -21,14 +21,14 @@ export default function SocialShare({ url, title, description, className, social
 
       <div className={styles.shareButtons}>
         <button
-          onClick={() => handleShare('twitter')}
-          className={`${styles.shareButton} ${styles.twitter} ${isReshare('twitter') ? styles.reshare : ''}`}
-          aria-label={getAriaLabel('twitter')}
-          title={getAriaLabel('twitter')}
+          onClick={() => handleShare('x')}
+          className={`${styles.shareButton} ${styles.x} ${isReshare('x') ? styles.reshare : ''}`}
+          aria-label={getAriaLabel('x')}
+          title={getAriaLabel('x')}
         >
           <div className={styles.shareIcon}></div>
           <span className={styles.shareText}>
-            {getButtonLabel('twitter', isReshare('twitter') ? 'reshare' : 'share')}
+            {getButtonLabel('x', isReshare('x') ? 'reshare' : 'share')}
           </span>
         </button>
 

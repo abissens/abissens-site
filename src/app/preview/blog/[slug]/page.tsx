@@ -4,13 +4,11 @@ import {notFound} from 'next/navigation';
 import AuthorComponent from '@/components/posts/author';
 import TagList from '@/components/tags/TagList';
 import dynamic from 'next/dynamic';
-import styles from './page.module.scss';
+import styles from '@/app/blog/[slug]/page.module.scss';
 import PostFooter from '@/components/blog/PostFooter';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
-import { BlogPostStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
-import type { Metadata } from 'next';
 import 'highlight.js/styles/github-dark-dimmed.css';
 import Diagram from '@/components/diagram/Diagram';
 
@@ -20,59 +18,6 @@ const FloatingSocialShare = dynamic(() => import('@/components/share/FloatingSoc
 
 export async function generateStaticParams() {
     return postBundle.getPosts().map(post => ({slug: post.slug}));
-}
-
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-    const { slug } = await params;
-    const post = postBundle.getPost(slug);
-
-    if (!post) {
-        return {};
-    }
-
-    const url = `${metadataInf.url}/blog/${post.slug}`;
-    const summary = post.summary.substring(0, 160).trim();
-
-    return {
-        title: `${post.title} | ${metadataInf.siteName}`,
-        description: summary,
-        keywords: ['programming', 'coding', 'software development', 'technology', 'blog', post.title.toLowerCase()],
-        authors: [{ name: post.author?.name || 'Abissens', url: post.author?.github || metadataInf.url }],
-        openGraph: {
-            type: 'article',
-            url,
-            title: post.title,
-            description: summary,
-            siteName: metadataInf.siteName,
-            locale: 'en_US',
-            images: [
-                {
-                    url: '/assets/og-image.png',
-                    width: 793,
-                    height: 771,
-                    alt: post.title,
-                }
-            ],
-            publishedTime: post.date,
-            authors: [post.author?.name || 'Abissens'],
-            section: 'Technology',
-            tags: ['programming', 'coding', 'technology'],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: post.title,
-            description: summary,
-            images: ['/assets/og-image.png'],
-            creator: '@abissens',
-        },
-        alternates: {
-            canonical: url,
-        },
-        robots: {
-            index: true,
-            follow: true,
-        },
-    };
 }
 
 const mdxComponents = {
@@ -86,19 +31,18 @@ const mdOptions = {
     }
 }
 
-export default async function BlogPost({params}: { params: Promise<{ slug: string }> }) {
+export default async function PreviewBlogPost({params}: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const post = postBundle.getPost(slug);
-    if (!post || post.tags.includes('preview')) {
+    if (!post) {
         return notFound();
     }
     const {content, title, formattedDate, author, tags, summary, socialUrls} = post;
-    const postUrl = `${metadataInf.url}/blog/${slug}`;
+    const postUrl = `${metadataInf.url}/preview/blog/${slug}`;
     const { prev, next } = postBundle.getAdjacentPosts(slug);
 
     return (
         <div>
-            <BlogPostStructuredData post={post} url={metadataInf.url} />
             <div className={styles.postHeader}>
                 <h2 className={styles.postTitle}>{title}</h2>
                 <div className={styles.postHead}>
