@@ -6,10 +6,13 @@ import { TagPostsPage } from '@/components/pages';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return postBundle.getAllTags()
-    .map(tag => ({
-      tag: encodeURIComponent(tag),
-    }));
+  const tags = postBundle.getAllTags();
+  if (tags.length === 0) {
+    return [{ tag: '__placeholder__' }];
+  }
+  return tags.map(tag => ({
+    tag: encodeURIComponent(tag),
+  }));
 }
 
 export default async function PreviewTagPage({ params }: { params: Promise<{ tag: string }> }) {

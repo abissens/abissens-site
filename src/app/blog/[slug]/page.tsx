@@ -9,7 +9,12 @@ import 'highlight.js/styles/github-dark-dimmed.css';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return postBundle.getPublishedPosts().map(post => ({ slug: post.slug }));
+  const posts = postBundle.getPublishedPosts();
+  // Return placeholder when no posts to prevent Next.js "missing generateStaticParams" error
+  if (posts.length === 0) {
+    return [{ slug: '__placeholder__' }];
+  }
+  return posts.map(post => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

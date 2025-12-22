@@ -8,10 +8,13 @@ import type { Metadata } from 'next';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return postBundle.getPublishedTags()
-    .map(tag => ({
-      tag: encodeURIComponent(tag),
-    }));
+  const tags = postBundle.getPublishedTags();
+  if (tags.length === 0) {
+    return [{ tag: '__placeholder__' }];
+  }
+  return tags.map(tag => ({
+    tag: encodeURIComponent(tag),
+  }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
