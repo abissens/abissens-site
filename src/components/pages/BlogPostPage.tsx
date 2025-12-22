@@ -1,13 +1,12 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { postBundle, PostData } from '@/lib/posts';
 import { RouteMode } from '@/lib/routes';
-import { mdxOptions } from '@/lib/mdx';
 import AuthorComponent from '@/components/posts/author';
 import TagList from '@/components/tags/TagList';
 import dynamic from 'next/dynamic';
 import PostFooter from '@/components/blog/PostFooter';
 import { BlogPostStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
+import SafeMDXContent from '@/components/mdx/SafeMDXContent';
 import Diagram from '@/components/diagram/Diagram';
 import styles from '@/app/blog/[slug]/page.module.scss';
 
@@ -46,7 +45,7 @@ export default function BlogPostPage({ post, mode }: BlogPostPageProps) {
         <TagList tags={tags} showLinks={true} className={styles.tags} />
       </div>
       <div className={styles.postContent}>
-        <MDXRemote source={content} options={mdxOptions} components={mdxComponents} />
+        <SafeMDXContent content={content} components={mdxComponents} />
       </div>
       <ShareButtons
         variant="floating"

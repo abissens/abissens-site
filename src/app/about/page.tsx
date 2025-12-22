@@ -1,11 +1,10 @@
-import {MDXRemote} from 'next-mdx-remote/rsc';
 import path from 'path';
 import * as fs from 'node:fs';
 import Link from 'next/link';
 import { PersonStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 import { postBundle } from '@/lib/posts';
-import { mdxOptions } from '@/lib/mdx';
+import SafeMDXContent from '@/components/mdx/SafeMDXContent';
 import type { Metadata } from 'next';
 import styles from './page.module.scss';
 
@@ -59,7 +58,7 @@ export default async function About() {
             />
 
             <main className={styles.aboutContent}>
-                <MDXRemote source={content} options={mdxOptions}/>
+                <SafeMDXContent content={content} />
             </main>
 
             <div className={styles.socialLinks}>
