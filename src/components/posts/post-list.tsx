@@ -1,9 +1,9 @@
 import styles from './post-list.module.scss';
 import PostItem from '@/components/posts/post-item';
-import { PostData } from '@/lib/posts';
+import { PostData, SearchPost } from '@/lib/posts';
 
 interface PostListProps {
-    posts: PostData[];
+    posts: (PostData | SearchPost)[];
 }
 
 const PostList: React.FC<PostListProps> = ({ posts }) => {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo, useTransition, memo } from 'react';
-import { PostData } from '@/lib/posts';
+import { SearchPost } from '@/lib/posts';
 import PostList from '@/components/posts/post-list';
 import Pagination from '@/components/pagination/Pagination';
 import { usePagination, paginateItems } from '@/hooks/usePagination';
@@ -10,10 +10,10 @@ import { useSearchParams } from 'next/navigation';
 import styles from './BasicSearch.module.scss';
 
 interface BasicSearchClientProps {
-  posts: PostData[];
+  posts: SearchPost[];
 }
 
-const MemoizedPostList = memo(function SearchPostList({ posts }: { posts: PostData[] }) {
+const MemoizedPostList = memo(function SearchPostList({ posts }: { posts: SearchPost[] }) {
   return <PostList posts={posts} />;
 }, (prevProps, nextProps) => {
   if (prevProps.posts.length !== nextProps.posts.length) return false;
@@ -30,7 +30,7 @@ const POSTS_PER_PAGE = 6;
 export default function BasicSearchClient({ posts }: BasicSearchClientProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isPending, startTransition] = useTransition();
-  const [filteredPosts, setFilteredPosts] = useState<PostData[]>(posts);
+  const [filteredPosts, setFilteredPosts] = useState<SearchPost[]>(posts);
 
   const searchParams = useSearchParams();
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
@@ -67,7 +67,7 @@ export default function BasicSearchClient({ posts }: BasicSearchClientProps) {
       const searchableText = [
         post.title.toLowerCase(),
         post.summary.toLowerCase(),
-        post.content.toLowerCase(),
+        post.searchContent.toLowerCase(),
         ...post.tags.map(tag => tag.toLowerCase())
       ].join(' ');
 

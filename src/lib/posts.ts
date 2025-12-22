@@ -32,6 +32,17 @@ export interface PostData {
     };
 }
 
+// Lightweight post data for search - no full content
+export interface SearchPost {
+    slug: string;
+    title: string;
+    summary: string;
+    tags: string[];
+    formattedDate: string;
+    author: Author | undefined;
+    searchContent: string; // Processed plain text excerpt
+}
+
 class PostBundle {
 
     private readonly authors: Record<string, Author>;
@@ -119,6 +130,30 @@ class PostBundle {
 
     getAuthor(name: string): Author | undefined {
         return this.authors[name.toLowerCase()];
+    }
+
+    getSearchIndex(): SearchPost[] {
+        return this.getPublishedPosts().map(post => ({
+            slug: post.slug,
+            title: post.title,
+            summary: post.summary,
+            tags: post.tags,
+            formattedDate: post.formattedDate,
+            author: post.author,
+            searchContent: this.stripMarkdown(post.content).slice(0, 500),
+        }));
+    }
+
+    private stripMarkdown(content: string): string {
+        return content
+            .replace(/```[\s\S]*?```/g, ' ')        // Remove code blocks
+            .replace(/`[^`]+`/g, ' ')               // Remove inline code
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Links to text
+            .replace(/!\[[^\]]*\]\([^)]+\)/g, '')   // Remove images
+            .replace(/[#*_~>`|]/g, '')              // Remove markdown chars
+            .replace(/<[^>]+>/g, '')                // Remove HTML tags
+            .replace(/\s+/g, ' ')                   // Normalize whitespace
+            .trim();
     }
 
     private buildTagIndex(posts: PostData[]): Record<string, PostData[]> {
