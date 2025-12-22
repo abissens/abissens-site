@@ -12,7 +12,7 @@ import { metadataInf } from '@/components/metadata';
 import Diagram from '@/components/diagram/Diagram';
 import styles from '@/app/blog/[slug]/page.module.scss';
 
-const FloatingSocialShare = dynamic(() => import('@/components/share/FloatingSocialShare'), {
+const ShareButtons = dynamic(() => import('@/components/share/ShareButtons'), {
   loading: () => <div style={{ minHeight: '200px' }} />
 });
 
@@ -56,7 +56,8 @@ export default function BlogPostPage({ post, mode }: BlogPostPageProps) {
       <div className={styles.postContent}>
         <MDXRemote source={content} options={mdOptions} components={mdxComponents} />
       </div>
-      <FloatingSocialShare
+      <ShareButtons
+        variant="floating"
         url={postUrl}
         title={title}
         description={summary}

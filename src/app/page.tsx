@@ -1,5 +1,5 @@
-import BlogPage from '@/app/blog/page';
+import { BlogListPage } from '@/components/pages';
 
 export default function Home() {
-  return <BlogPage />;
+  return <BlogListPage mode="published" />;
 }
