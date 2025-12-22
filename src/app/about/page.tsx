@@ -1,12 +1,11 @@
 import {MDXRemote} from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
 import path from 'path';
 import * as fs from 'node:fs';
 import Link from 'next/link';
 import { PersonStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 import { postBundle } from '@/lib/posts';
+import { mdxOptions } from '@/lib/mdx';
 import type { Metadata } from 'next';
 import styles from './page.module.scss';
 
@@ -44,13 +43,6 @@ export const metadata: Metadata = {
   },
 };
 
-const mdOptions = {
-    mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeHighlight],
-    }
-}
-
 export default async function About() {
     const aboutPath = path.join(process.cwd(), 'src', 'posts', '.about.md');
     const content = fs.readFileSync(aboutPath, 'utf-8');
@@ -67,7 +59,7 @@ export default async function About() {
             />
 
             <main className={styles.aboutContent}>
-                <MDXRemote source={content} options={mdOptions}/>
+                <MDXRemote source={content} options={mdxOptions}/>
             </main>
 
             <div className={styles.socialLinks}>
