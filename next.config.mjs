@@ -13,9 +13,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-    output: 'export',
+    // Only use static export in production builds (dev mode doesn't support it well with dynamic routes)
+    ...(isProd && { output: 'export' }),
     trailingSlash: true,
     poweredByHeader: false,
     generateEtags: false,

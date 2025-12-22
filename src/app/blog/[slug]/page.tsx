@@ -5,6 +5,9 @@ import { metadataInf } from '@/components/metadata';
 import type { Metadata } from 'next';
 import 'highlight.js/styles/github-dark-dimmed.css';
 
+// Return 404 for slugs not in generateStaticParams (required for static export)
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return postBundle.getPublishedPosts().map(post => ({ slug: post.slug }));
 }

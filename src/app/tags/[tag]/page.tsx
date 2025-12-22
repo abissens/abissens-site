@@ -4,6 +4,9 @@ import { TagPostsPage } from '@/components/pages';
 import { metadataInf } from '@/components/metadata';
 import type { Metadata } from 'next';
 
+// Return 404 for tags not in generateStaticParams (required for static export)
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return postBundle.getPublishedTags()
     .map(tag => ({

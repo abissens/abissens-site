@@ -2,6 +2,9 @@ import { postBundle } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 import { TagPostsPage } from '@/components/pages';
 
+// Return 404 for tags not in generateStaticParams (required for static export)
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return postBundle.getAllTags()
     .map(tag => ({

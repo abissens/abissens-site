@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { BlogPostPage } from '@/components/pages';
 import 'highlight.js/styles/github-dark-dimmed.css';
 
+// Return 404 for slugs not in generateStaticParams (required for static export)
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return postBundle.getPosts().map(post => ({ slug: post.slug }));
 }
