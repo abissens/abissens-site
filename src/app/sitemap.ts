@@ -5,7 +5,7 @@ import { metadataInf } from '@/components/metadata';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = postBundle.getPosts();
+  const posts = postBundle.getPublishedPosts();
 
   const staticPages = [
     {
@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const tagPages = postBundle.getAllTags().map(tag => ({
+  const tagPages = postBundle.getPublishedTags().map(tag => ({
     url: `${metadataInf.url}/tags/${encodeURIComponent(tag)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,

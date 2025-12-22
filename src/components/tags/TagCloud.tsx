@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useRoutes } from '@/components/providers/RouteContext';
 import styles from './TagCloud.module.scss';
 
 interface TagWithCount {
@@ -12,6 +15,8 @@ interface TagCloudProps {
 }
 
 export default function TagCloud({ tags, className }: TagCloudProps) {
+  const { paths } = useRoutes();
+
   if (tags.length === 0) return null;
 
   const maxCount = Math.max(...tags.map(t => t.count));
@@ -33,7 +38,7 @@ export default function TagCloud({ tags, className }: TagCloudProps) {
       {tags.map(({ tag, count }) => (
         <Link
           key={tag}
-          href={`/tags/${encodeURIComponent(tag)}`}
+          href={paths.tag(tag)}
           className={`${styles.tag} ${getSizeClass(count)}`}
           title={`${count} post${count !== 1 ? 's' : ''}`}
         >

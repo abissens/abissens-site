@@ -3,6 +3,7 @@ import "./globals.scss";
 import Header from '@/components/header';
 import styles from './layout.module.css';
 import {ThemeProvider} from '@/components/providers/ThemeContext';
+import {RouteProvider} from '@/components/providers/RouteContext';
 import { WebsiteStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 
@@ -61,8 +62,10 @@ export default function RootLayout({
             description={metadataInf.description}
           />
           <ThemeProvider>
-            <Header></Header>
-            {children}
+            <RouteProvider>
+              <Header></Header>
+              {children}
+            </RouteProvider>
           </ThemeProvider>
         </div>
       </body>

@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useRoutes } from '@/components/providers/RouteContext';
 import styles from './TagList.module.scss';
 
 interface TagListProps {
@@ -8,6 +11,8 @@ interface TagListProps {
 }
 
 export default function TagList({ tags, className, showLinks = false }: TagListProps) {
+  const { paths } = useRoutes();
+
   if (tags.length === 0) return null;
 
   return (
@@ -16,7 +21,7 @@ export default function TagList({ tags, className, showLinks = false }: TagListP
         showLinks ? (
           <Link
             key={tag}
-            href={`/tags/${encodeURIComponent(tag)}`}
+            href={paths.tag(tag)}
             className={styles.tag}
           >
             #{tag}

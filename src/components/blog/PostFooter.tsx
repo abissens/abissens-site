@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Author, PostData } from '@/lib/posts';
+import { useRoutes } from '@/components/providers/RouteContext';
 import { useShareActions } from '@/hooks/useShareActions';
 import styles from './PostFooter.module.scss';
 
@@ -30,6 +31,7 @@ export default function PostFooter({
   shareDescription,
   socialUrls
 }: PostFooterProps) {
+  const { paths } = useRoutes();
   const { copied, handleShare, getAriaLabel, isReshare } = useShareActions({
     url: shareUrl || '',
     title: shareTitle || '',
@@ -120,7 +122,7 @@ export default function PostFooter({
       <nav className={styles.postNav}>
         <div className={styles.navItem}>
           {prevPost && (
-            <Link href={`/blog/${prevPost.slug}`} className={styles.navLink}>
+            <Link href={paths.blogPost(prevPost.slug)} className={styles.navLink}>
               <span className={styles.navLabel}>Previous</span>
               <span className={styles.navTitle}>{prevPost.title}</span>
             </Link>
@@ -129,7 +131,7 @@ export default function PostFooter({
 
         <div className={`${styles.navItem} ${styles.navItemNext}`}>
           {nextPost && (
-            <Link href={`/blog/${nextPost.slug}`} className={styles.navLink}>
+            <Link href={paths.blogPost(nextPost.slug)} className={styles.navLink}>
               <span className={styles.navLabel}>Next</span>
               <span className={styles.navTitle}>{nextPost.title}</span>
             </Link>

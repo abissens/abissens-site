@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { PostData } from '@/lib/posts';
+import { useRoutes } from '@/components/providers/RouteContext';
 import PostList from '@/components/posts/post-list';
 import Pagination from '@/components/pagination/Pagination';
 import { usePagination, paginateItems } from '@/hooks/usePagination';
@@ -11,20 +12,18 @@ interface PaginatedPostListProps {
   posts: PostData[];
   postsPerPage?: number;
   enableUrlPagination?: boolean;
-  showDrafts?: boolean;
-  basePath?: string;
 }
 
 export default function PaginatedPostList({
   posts,
   postsPerPage = 6,
   enableUrlPagination = true,
-  showDrafts = false,
-  basePath = '/blog'
 }: PaginatedPostListProps) {
+  const { includePreviews } = useRoutes();
+
   const filteredPosts = useMemo(
-    () => showDrafts ? posts : posts.filter(post => !post.tags.includes('preview')),
-    [posts, showDrafts]
+    () => includePreviews ? posts : posts.filter(post => !post.tags.includes('preview')),
+    [posts, includePreviews]
   );
 
   const { currentPage, totalPages, startIndex, endIndex } = usePagination({
@@ -40,7 +39,7 @@ export default function PaginatedPostList({
 
   return (
     <div className={styles.paginatedPostList}>
-      <PostList posts={currentPosts} basePath={basePath} />
+      <PostList posts={currentPosts} />
 
       <Pagination
         currentPage={currentPage}

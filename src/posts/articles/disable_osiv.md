@@ -248,7 +248,6 @@ public interface OrderJpaRepository extends JpaRepository<OrderJpaEntity, Long> 
             SELECT o FROM OrderJpaEntity o
             LEFT JOIN FETCH o.orderLines ol
             LEFT JOIN FETCH ol.product p
-            LEFT JOIN FETCH p.tags
             WHERE o.id = :id
             """)
     Optional<OrderJpaEntity> findByIdWithOrderLines(@Param("id") Long id);

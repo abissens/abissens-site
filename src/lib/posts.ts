@@ -48,8 +48,16 @@ class PostBundle {
         this.allTags = Object.keys(this.tagIndex).sort();
     }
 
+    private isPreview(post: PostData): boolean {
+        return post.tags.includes('preview');
+    }
+
     getPosts(): PostData[] {
         return this.sortedPosts;
+    }
+
+    getPublishedPosts(): PostData[] {
+        return this.sortedPosts.filter(post => !this.isPreview(post));
     }
 
     getPost(slug: string): PostData | undefined {
@@ -60,8 +68,16 @@ class PostBundle {
         return this.tagIndex[tag] || [];
     }
 
+    getPublishedPostsByTag(tag: string): PostData[] {
+        return (this.tagIndex[tag] || []).filter(post => !this.isPreview(post));
+    }
+
     getAllTags(): string[] {
         return this.allTags;
+    }
+
+    getPublishedTags(): string[] {
+        return this.allTags.filter(tag => tag !== 'preview');
     }
 
     getTagsWithCount(): Array<{ tag: string; count: number }> {
@@ -71,7 +87,26 @@ class PostBundle {
         }));
     }
 
+    getPublishedTagsWithCount(): Array<{ tag: string; count: number }> {
+        return this.getPublishedTags().map(tag => ({
+            tag,
+            count: this.getPublishedPostsByTag(tag).length
+        }));
+    }
+
     getAdjacentPosts(slug: string): { prev: PostData | null; next: PostData | null } {
+        const publishedPosts = this.getPublishedPosts();
+        const index = publishedPosts.findIndex(post => post.slug === slug);
+        if (index === -1) {
+            return { prev: null, next: null };
+        }
+        return {
+            prev: index < publishedPosts.length - 1 ? publishedPosts[index + 1] : null,
+            next: index > 0 ? publishedPosts[index - 1] : null,
+        };
+    }
+
+    getAllAdjacentPosts(slug: string): { prev: PostData | null; next: PostData | null } {
         const index = this.sortedPosts.findIndex(post => post.slug === slug);
         if (index === -1) {
             return { prev: null, next: null };
