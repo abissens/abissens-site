@@ -1,34 +1,23 @@
 ---
 title: "Disable Open Session In View"
 date: "2025-12-14"
-tags: [ "java", "spring", "preview" ]
+tags: [ "java", "spring", "jpa", "Hibernate", "preview" ]
 author: 'Abissens'
 git: https://github.com/elethought-courses/osiv-course.git
 ---
 
-During the past year, I conducted more than 70 technical interviews, mostly for developer and tech lead positions and at
-least partly focused on Java/Spring platforms.
-And there is this question which, to my surprise, no one answers;
-Not that they answer it incorrectly or incompletely, but the candidates simply do not know the concept.
+There's a Spring concept that rarely comes up in technical discussions, even among experienced Java developers. 
+Not because it's obscure—every Spring Boot startup displays a warning about it—but because it works silently 
+in the background until it doesn't.
 
-So much so that I no longer considered asking for evaluation purposes, but rather out of curiosity, to see how generally
-unknown this concept is.
-
-That question was "How does Open Session In View work ?" or "What is Open Session In View for ?"
+That concept is Open Session In View.
 ---
 
-During the past year, I conducted more than 70 technical interviews, mostly for developer and tech lead positions and at
-least partly focused on Java/Spring platforms.
-And there is this question which, to my surprise, no one answers;
-Not that they answer it incorrectly or incompletely, but the candidates simply do not know the concept.
+There's a Spring concept that rarely comes up in technical discussions, even among experienced Java developers. 
+Not because it's obscure—every Spring Boot startup displays a warning about it—but because it works silently 
+in the background until it doesn't.
 
-So much so that I no longer considered asking for evaluation purposes, but rather out of curiosity, to see how generally
-unknown this concept is.
-
-That question was "How does Open Session In View work ?" or "What is Open Session In View for ?"
-
-What I find puzzling is that every compilation and every startup of any Spring Boot project produces a default warning
-that draws attention to the fact that OSIV should be disabled. This warning is the following:
+That concept is Open Session In View.
 
 ```shell
 WARN 7140 --- [main] JpaBaseConfiguration$JpaWebConfiguration :
@@ -37,10 +26,20 @@ Therefore, database queries may be performed during view rendering.
 Explicitly configure spring.jpa.open-in-view to disable this warning
 ```
 
+Spring Boot enables OSIV by default primarily for developer convenience: 
+it prevents `LazyInitializationException` errors that would otherwise surface when accessing 
+unloaded entity associations in views or controllers. 
+For newcomers to JPA, these exceptions can be confusing and frustrating. OSIV makes things "just work" out of the box.
+
+However, the Spring team recognized that this convenience comes with trade-offs. 
+Rather than changing the default and breaking existing applications, 
+they opted to display this warning—encouraging developers to make an explicit, informed choice. 
+The message is clear: understand what OSIV does, then decide whether to keep it enabled or disable it for your use case.
+
 ### What is Open Session In View ?
 
 Like its name suggests, Open Session In View binds the database session lifecycle to the view layer requests;
-Session (a.k.a `Hibernate Session`, `Entity Manager`, `Unit of Work`, etc.) opens when the request starts and closes
+Session (a.k.a. `Hibernate Session`, `Entity Manager`, `Persistence context`, `Unit of Work`, etc.) opens when the request starts and closes
 when it finishes.
 
 Spring Boot names this pattern `Open EntityManager in View`
@@ -49,7 +48,7 @@ Spring Boot names this pattern `Open EntityManager in View`
 > the "Open EntityManager in View" pattern, to allow for lazy loading in web views.
 > If you do not want this behavior, you should set spring.jpa.open-in-view to false in your application.properties.[^1]
 
-And that is an antipattern since on one hand it violates many of the SOLID principles, and on the other, it introduces
+This is an antipattern. On one hand, it violates many of the SOLID principles; on the other, it introduces
 new structural and performance issues. The OSIV pattern obviously violates the Single Responsibility Principle by making the
 view layer handle data access concerns.
 
@@ -82,7 +81,7 @@ Even a well-architected application with Domain/Persistence separation can suffe
 surprised by the number of issues revealed after disabling it late in the project. This section tries to demonstrate these possible issues and
 how to handle them. 
 
-For this purpose I created two identical applications here https://github.com/elethought-courses/osiv-course.git.
+For this purpose, I created two identical applications available in [this repository](https://github.com/elethought-courses/osiv-course.git).
 `osiv-enabled-by-default` does not disable the default OSIV behaviour while `osiv-disabled` does disable it.
 
 The following diagram shows how an `Order` domain is mapped and separated from persistence entities.
@@ -97,7 +96,7 @@ introducing coupling and issues.
 During the mapping from JPA entities to domain objects, lazy associations may be accessed. 
 Because the session is always open, these queries succeed silently rather than failing with a `LazyInitializationException`.
 
-N+1 issues silently rise and multiply.
+As a result, N+1 issues silently accumulate and proliferate throughout the codebase.
 
 As explained below, trying to disable OSIV and defining transaction boundaries at the service layer will address lazy initialization
 issues but still hide N+1 ones, and introducing more fixes can reveal previously hidden MultiBag errors. 
@@ -127,8 +126,8 @@ org.hibernate.LazyInitializationException: Cannot lazily initialize collection o
 	at java.base/java.util.Optional.map(Optional.java:260) ~[na:na]
 ```
 
-Here we are tempted to add the `@Transactional` annotation to all high-level application service methods. This will bind the persistence session
-to the transaction boundaries. On fetch-only services, the `readOnly` attribute should be set[^4][^5]. 
+At this point, one might be tempted to add the `@Transactional` annotation to all high-level application service methods. This will bind the persistence session
+to the transaction boundaries. On fetch-only services, the `readOnly` attribute should be set[^4][^5].
 
 The service works again. But all we did is narrow the persistence session lifecycle from the request context
 to the transactional service. We certainly slightly enhanced database connection pool performance, but we didn't fix the previously announced
@@ -235,8 +234,17 @@ where
 
 But we've just traded one hidden problem for another: the Cartesian product is still there, silently
 multiplying rows in the result set. The `Set` merely deduplicates in memory, masking the fact that we're fetching far
-more data than necessary from the database. And we've also changed the collection semantics which may introduce subtle
-bugs elsewhere.
+more data than necessary from the database.
+
+**This `List` to `Set` change is a particularly dangerous fix** because it appears to work perfectly in development
+with small datasets. The real cost becomes visible only in production: if an order has 5 lines and 3 notes,
+the database returns 15 rows instead of 5 + 3. With 50 lines and 20 notes, you get 1000 rows instead of 70.
+The network overhead and memory consumption grow quadratically while your application happily deduplicates
+the bloated result set.
+
+Additionally, changing from `List` to `Set` alters collection semantics. Lists preserve insertion order and allow
+duplicates; Sets do not. If your domain logic relies on ordering (e.g., order lines sorted by line number) or
+allows duplicate entries, this "fix" silently breaks business rules.
 
 The proper solution is to split the fetch into multiple queries, each fetching one collection at a time. 
 
