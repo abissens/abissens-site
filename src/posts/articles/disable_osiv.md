@@ -6,18 +6,16 @@ author: 'Abissens'
 git: https://github.com/elethought-courses/osiv-course.git
 ---
 
-There's a Spring concept that rarely comes up in technical discussions, even among experienced Java developers. 
-Not because it's obscure—every Spring Boot startup displays a warning about it—but because it works silently 
-in the background until it doesn't.
-
-That concept is Open Session In View.
+Open Session In View is a blind spot for most Spring developers—not because it's obscure, but because it works
+silently until it doesn't. This article explains what OSIV does, why it's problematic, and what breaks when
+you disable it.
 ---
 
-There's a Spring concept that rarely comes up in technical discussions, even among experienced Java developers. 
-Not because it's obscure—every Spring Boot startup displays a warning about it—but because it works silently 
+Having asked about Open Session In View in many interviews, I've noticed it's a blind spot for most developers.
+Not because it's obscure—every Spring Boot startup displays a warning about it—but because it works silently
 in the background until it doesn't.
 
-That concept is Open Session In View.
+Every Spring Boot application with JPA displays this warning at startup:
 
 ```shell
 WARN 7140 --- [main] JpaBaseConfiguration$JpaWebConfiguration :
@@ -29,7 +27,8 @@ Explicitly configure spring.jpa.open-in-view to disable this warning
 Spring Boot enables OSIV by default primarily for developer convenience: 
 it prevents `LazyInitializationException` errors that would otherwise surface when accessing 
 unloaded entity associations in views or controllers. 
-For newcomers to JPA, these exceptions can be confusing and frustrating. OSIV makes things "just work" out of the box.
+For newcomers to JPA, these exceptions can be confusing and frustrating. 
+OSIV makes things "just work"—at a cost that only becomes apparent later.
 
 However, the Spring team recognized that this convenience comes with trade-offs. 
 Rather than changing the default and breaking existing applications, 
@@ -49,7 +48,7 @@ Spring Boot names this pattern `Open EntityManager in View`
 > If you do not want this behavior, you should set spring.jpa.open-in-view to false in your application.properties.[^1]
 
 This is an antipattern. On one hand, it violates many of the SOLID principles; on the other, it introduces
-new structural and performance issues. The OSIV pattern obviously violates the Single Responsibility Principle by making the
+new structural and performance issues. The OSIV pattern violates the Single Responsibility Principle by making the
 view layer handle data access concerns.
 
 Then in a broad sense, it violates the Liskov Substitution Principle since the behavior of
