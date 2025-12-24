@@ -1,40 +1,43 @@
-## Abissens site 
+# Abissens
 
+A developer blog about software development—patterns, pitfalls, and the things I wish I'd understood sooner.
 
-### Scaffolding 
+**[abissens.elethoughts.tech](https://abissens.elethoughts.tech)**
 
-```shell
-npx create-next-app@latest
-# What is your project named? abissens-site
-# Would you like to use TypeScript?  Yes
-# Would you like to use ESLint?  Yes
-# Would you like to use Tailwind CSS? No
-# Would you like your code inside a `src/` directory?  Yes
-# Would you like to use App Router? (recommended)  Yes
-# Would you like to use Turbopack for `next dev`?  No / Yes
-# Would you like to customize the import alias (`@/*` by default)? No
+## About
 
-npm install @next/mdx @mdx-js/loader next-mdx-remote gray-matter remark remark-html 
-npm install --save-dev sass
-# Edit next.config.mjs
+Abissens is a personal blog where I write about software engineering topics that rarely get the attention they deserve. 
+Sometimes it's a deep dive, sometimes it's a quick note on something I stumbled upon.
 
-# Initial structure (check commit)
+## Connect
 
+- [Substack Newsletter](https://abissens.substack.com) — Get notified when new articles are published
+- [GitHub](https://github.com/abissens)
+- [X (Twitter)](https://x.com/abissens)
+- [LinkedIn](https://www.linkedin.com/in/hichem-ben-sassi-5ab200224/)
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router, Static Export)
+- **Styling:** SCSS Modules
+- **Content:** MDX with gray-matter
+- **Hosting:** Cloudflare Pages
+- **Newsletter:** Substack
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
 npm run build
 ```
 
-#### next.config.mjs
-```typescript
-/** @type {import('next').NextConfig} */
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const withMDX = require('@next/mdx')({
-    extension: /\.mdx?$/
-});
+## License
 
-export default withMDX({
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-    output: 'export', 
-    trailingSlash: true,
-});
-```
+- **Content (articles, images):** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — Share with attribution, non-commercial use only
+- **Source code:** [MIT](./LICENSE)
