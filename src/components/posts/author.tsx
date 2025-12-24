@@ -53,6 +53,16 @@ export default function AuthorComponent({ author, className }: AuthorComponentPr
             <div className={styles.linkedin}></div>
           </a>
         )}
+        {author.substack && (
+          <a
+            href={author.substack}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Substack"
+          >
+            <div className={styles.substack}></div>
+          </a>
+        )}
       </div>
     </div>
   );

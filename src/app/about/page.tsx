@@ -5,6 +5,7 @@ import { PersonStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 import { postBundle } from '@/lib/posts';
 import SafeMDXContent from '@/components/mdx/SafeMDXContent';
+import { NewsletterSubscribe } from '@/components/newsletter';
 import type { Metadata } from 'next';
 import styles from './page.module.scss';
 
@@ -77,12 +78,19 @@ export default async function About() {
                         <span className={`${styles.socialIcon} ${styles.linkedin}`} />
                     </Link>
                 )}
+                {author?.substack && (
+                    <Link href={author.substack} target="_blank" rel="noopener noreferrer" aria-label="Substack">
+                        <span className={`${styles.socialIcon} ${styles.substack}`} />
+                    </Link>
+                )}
                 {author?.email && (
                     <Link href={`mailto:${author.email}`} aria-label="Email">
                         <span className={`${styles.socialIcon} ${styles.email}`} />
                     </Link>
                 )}
             </div>
+
+            <NewsletterSubscribe variant="compact" />
         </div>
     );
 }

@@ -9,6 +9,7 @@ export interface AuthorAttr {
     email: string | undefined;
     github: string | undefined;
     linkedin: string | undefined;
+    substack: string | undefined;
 }
 
 export interface Author extends AuthorAttr {

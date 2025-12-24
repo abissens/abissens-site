@@ -95,6 +95,11 @@ export default function PostFooter({
                 <span className={styles.linkIcon} data-icon="linkedin" />
               </a>
             )}
+            {author.substack && (
+              <a href={author.substack} target="_blank" rel="noopener noreferrer" aria-label="Substack">
+                <span className={styles.linkIcon} data-icon="substack" />
+              </a>
+            )}
             {author.email && (
               <a href={`mailto:${author.email}`} aria-label="Email">
                 <span className={styles.linkIcon} data-icon="email" />

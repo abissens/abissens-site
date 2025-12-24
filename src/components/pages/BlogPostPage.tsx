@@ -8,6 +8,7 @@ import { BlogPostStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
 import SafeMDXContent from '@/components/mdx/SafeMDXContent';
 import Diagram from '@/components/diagram/Diagram';
+import { NewsletterSubscribe } from '@/components/newsletter';
 import styles from '@/app/blog/[slug]/page.module.scss';
 
 const ShareButtons = dynamic(() => import('@/components/share/ShareButtons'), {
@@ -47,6 +48,7 @@ export default function BlogPostPage({ post, mode }: BlogPostPageProps) {
       <div className={styles.postContent}>
         <SafeMDXContent content={content} components={mdxComponents} />
       </div>
+      <NewsletterSubscribe />
       <ShareButtons
         variant="floating"
         url={postUrl}
