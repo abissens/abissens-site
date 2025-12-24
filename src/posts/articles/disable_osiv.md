@@ -68,10 +68,10 @@ query problem[^3], as entity graphs are incrementally fetched while iterating in
 can be controlled, optimized, or even noticed.
 
 Finally, keeping the persistence context open for the entire request lifecycle increases memory usage and database
-connection pressure, especially under high concurrency. What initially appears as a convenience feature ultimately
-trades short-term simplicity for long-term architectural erosion, encouraging an anemic service layer and pushing
-critical data-access decisions into the least appropriate place: the view.
+connection pressure, especially under high concurrency. 
 
+What initially appears as a convenience feature ultimately trades short-term simplicity for long-term architectural erosion, 
+encouraging an anemic service layer and pushing critical data-access decisions into the least appropriate place: the view.
 More details about these issues can be read in Vlad Mihalcea's blog post[^2].
 
 ### What does it take to disable OSIV ?
@@ -125,8 +125,8 @@ org.hibernate.LazyInitializationException: Cannot lazily initialize collection o
 	at java.base/java.util.Optional.map(Optional.java:260) ~[na:na]
 ```
 
-At this point, one might be tempted to add the `@Transactional` annotation to all high-level application service methods. This will bind the persistence session
-to the transaction boundaries. On fetch-only services, the `readOnly` attribute should be set[^4][^5].
+At this point, one might be tempted to add the `@Transactional` annotation to all high-level application service methods,
+binding the persistence session to the transaction boundaries.
 
 The service works again. But all we did is narrow the persistence session lifecycle from the request context
 to the transactional service. We certainly slightly enhanced database connection pool performance, but we didn't fix the previously announced
@@ -135,7 +135,7 @@ hidden issues.
 First, it feels odd to add a transactional boundary not to actually perform a transaction but to keep the persistence
 session alive for lazy loading. We are essentially abusing `@Transactional` as a session management tool rather than
 for its intended purpose of ensuring atomicity and consistency. Keep in mind that in Spring Data, all JPA repositories are
-transactional by default[^4] (even fetch methods). Transactional services are meant to coordinate multiple repository
+transactional by default[^4][^5] (even fetch methods). Transactional services are meant to coordinate multiple repository
 calls into a single unit of work, not to artificially extend the persistence context for lazy loading convenience. 
 
 Also, this approach leads to similar congestion issues as with OSIV enabled: the database connection is held for the
@@ -202,8 +202,7 @@ Doing so would produce a Cartesian product, resulting in duplicate rows and inco
 in our entity model, but OSIV masked it by lazily loading each collection separately. Now that we're trying to optimize
 with eager fetching, the problem surfaces.
 
-When facing this error, a quick search leads to countless Stack Overflow answers and blog posts suggesting to simply
-change `List` to `Set` in entity mappings. Unless we land on Vlad Mihalcea's[^6] article or are already aware of database
+The fix most of us try first is changing `List` to `Set` in entity mappings. Unless we land on Vlad Mihalcea's[^6] article or are already aware of database
 performance implications, we will likely apply this fix. The code compiles, the exception disappears, and the feature
 seems to work. Logs show only one SQL join-based query:
 
