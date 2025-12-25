@@ -1,7 +1,7 @@
 ---
 title: "Disable Open Session In View"
 date: "2025-12-14"
-tags: [ "java", "spring", "jpa", "hibernate", "preview" ]
+tags: [ "java", "spring", "jpa", "hibernate"]
 author: 'Abissens'
 git: https://github.com/elethought-courses/osiv-course.git
 ---
