@@ -1,20 +1,10 @@
 import dynamic from 'next/dynamic';
 import { metadataInf } from '@/components/metadata';
+import { Loading } from '@/components/loading';
 import type { Metadata } from 'next';
 
 const BasicSearch = dynamic(() => import('@/components/search/BasicSearch'), {
-    loading: () => (
-        <div style={{
-            minHeight: '400px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.1rem',
-            color: 'var(--secondary)'
-        }}>
-            Loading search...
-        </div>
-    )
+    loading: () => <Loading message="Preparing search..." size="large" />
 });
 
 export const metadata: Metadata = {

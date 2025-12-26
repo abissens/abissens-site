@@ -11,8 +11,10 @@ import Diagram from '@/components/diagram/Diagram';
 import { NewsletterSubscribe } from '@/components/newsletter';
 import styles from '@/app/blog/[slug]/page.module.scss';
 
+import { Loading } from '@/components/loading';
+
 const ShareButtons = dynamic(() => import('@/components/share/ShareButtons'), {
-  loading: () => <div style={{ minHeight: '200px' }} />
+  loading: () => <Loading message="Loading share options..." size="small" />
 });
 
 const mdxComponents = {

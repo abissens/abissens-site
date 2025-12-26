@@ -4,6 +4,7 @@ import { RouteMode } from '@/lib/routes';
 import PaginatedPostList from '@/components/blog/PaginatedPostList';
 import { BlogStructuredData } from '@/components/seo/StructuredData';
 import { metadataInf } from '@/components/metadata';
+import { Loading } from '@/components/loading';
 import styles from '@/app/blog/page.module.scss';
 
 interface BlogListPageProps {
@@ -18,7 +19,7 @@ export default function BlogListPage({ mode }: BlogListPageProps) {
   return (
     <div className={styles.postListPage}>
       {mode === 'published' && <BlogStructuredData url={metadataInf.url} />}
-      <Suspense fallback={<div>Loading posts...</div>}>
+      <Suspense fallback={<Loading message="Loading posts..." />}>
         <PaginatedPostList posts={posts} />
       </Suspense>
     </div>

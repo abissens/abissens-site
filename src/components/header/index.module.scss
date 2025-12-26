@@ -9,6 +9,21 @@
     }
 }
 
+.logoLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
 .logoWrapper {
     img {
         margin: 10px;

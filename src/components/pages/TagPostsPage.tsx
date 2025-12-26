@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { PostData } from '@/lib/posts';
 import { RouteMode, routeConfigs } from '@/lib/routes';
 import PaginatedPostList from '@/components/blog/PaginatedPostList';
+import { Loading } from '@/components/loading';
 import Link from 'next/link';
 import styles from '@/app/tags/[tag]/page.module.scss';
 
@@ -30,7 +31,7 @@ export default function TagPostsPage({ tag, posts, mode }: TagPostsPageProps) {
         </p>
       </div>
 
-      <Suspense fallback={<div>Loading posts...</div>}>
+      <Suspense fallback={<Loading message="Loading posts..." />}>
         <PaginatedPostList posts={posts} />
       </Suspense>
     </div>
