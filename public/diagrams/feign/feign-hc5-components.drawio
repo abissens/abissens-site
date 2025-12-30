@@ -1,0 +1,127 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.9">
+  <diagram name="FeignApacheHttpClient5Config Components" id="feign-hc5-components">
+    <mxGraphModel dx="1042" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="580" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="our-config-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;dashed=0;" value="" vertex="1">
+          <mxGeometry height="320" width="270" x="300" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="our-config-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;fontFamily=Helvetica;" value="FeignApacheHttpClient5Config" vertex="1">
+          <mxGeometry height="20" width="200" x="320" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="our-config-sublabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;fontFamily=Helvetica;" value="(child context)" vertex="1">
+          <mxGeometry height="15" width="200" x="320" y="83" as="geometry" />
+        </mxCell>
+        <mxCell id="client-bean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#333333;fontFamily=Helvetica;fontSize=11;" value="Client&#xa;(ApacheHttp5Client)" vertex="1">
+          <mxGeometry height="40" width="160" x="340" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="httpclient-bean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#333333;fontFamily=Helvetica;fontSize=11;" value="CloseableHttpClient" vertex="1">
+          <mxGeometry height="40" width="160" x="340" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="connmgr-bean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#333333;fontFamily=Helvetica;fontSize=11;" value="HttpClientConnectionManager" vertex="1">
+          <mxGeometry height="40" width="160" x="340" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="proxy-customizer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#333333;fontFamily=Helvetica;fontSize=10;" value="HttpClientBuilderCustomizer&#xa;(proxyCustomizer)" vertex="1">
+          <mxGeometry height="45" width="160" x="340" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" edge="1" parent="1" source="client-bean" style="endArrow=classic;html=1;strokeColor=#666666;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="httpclient-bean" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" edge="1" parent="1" source="httpclient-bean" style="endArrow=classic;html=1;strokeColor=#666666;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="connmgr-bean" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" edge="1" parent="1" source="proxy-customizer" style="endArrow=classic;html=1;strokeColor=#666666;dashed=1;entryX=1;entryY=0.5;exitX=1;exitY=0.5;entryDx=0;entryDy=0;" target="httpclient-bean" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="312" />
+              <mxPoint x="530" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="customizes-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;fontFamily=Helvetica;" value="customizes" vertex="1">
+          <mxGeometry height="15" width="50" x="532" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="env-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontFamily=Helvetica;fontSize=11;" value="Environment" vertex="1">
+          <mxGeometry height="35" width="130" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="props-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontFamily=Helvetica;fontSize=10;" value="FeignClientProperties&#xa;(our helper)" vertex="1">
+          <mxGeometry height="45" width="130" x="40" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="spring-props-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontFamily=Helvetica;fontSize=10;" value="FeignHttpClientProperties&#xa;(Spring)" vertex="1">
+          <mxGeometry height="45" width="130" x="40" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="customizers-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontFamily=Helvetica;fontSize=9;" value="ObjectProvider&lt;List&lt;&#xa;HttpClientBuilderCustomizer&gt;&gt;" vertex="1">
+          <mxGeometry height="45" width="130" x="40" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="dep-arrow1" edge="1" parent="1" source="env-box" style="endArrow=classic;html=1;strokeColor=#999999;dashed=1;exitX=1;exitY=0.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="128" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-arrow2" edge="1" parent="1" source="props-box" style="endArrow=classic;html=1;strokeColor=#999999;dashed=1;exitX=1;exitY=0.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="182" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-arrow3" edge="1" parent="1" source="spring-props-box" style="endArrow=classic;html=1;strokeColor=#999999;dashed=1;exitX=1;exitY=0.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="242" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep-arrow4" edge="1" parent="1" source="customizers-box" style="endArrow=classic;html=1;strokeColor=#999999;dashed=1;exitX=1;exitY=0.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="302" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="props-note1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontColor=#666666;fontSize=9;fontStyle=2;" value="Per-client: proxy, tls" vertex="1">
+          <mxGeometry height="15" width="110" x="180" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="props-note2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;fontStyle=2;fontFamily=Helvetica;" value="Standard: timeouts, pool" vertex="1">
+          <mxGeometry height="15" width="110" x="180" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="other-beans-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;strokeWidth=1;dashed=1;" value="" vertex="1">
+          <mxGeometry height="280" width="180" x="620" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="other-beans-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=11;fontFamily=Helvetica;" value="Other Feign Bean Configs" vertex="1">
+          <mxGeometry height="20" width="160" x="630" y="62" as="geometry" />
+        </mxCell>
+        <mxCell id="other-beans-sublabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;fontFamily=Helvetica;" value="(still apply with custom Client)" vertex="1">
+          <mxGeometry height="15" width="160" x="630" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="error-decoder" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=10;" value="ErrorDecoder" vertex="1">
+          <mxGeometry height="30" width="140" x="640" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="request-interceptor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=10;" value="RequestInterceptor" vertex="1">
+          <mxGeometry height="30" width="140" x="640" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="retryer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=10;" value="Retryer" vertex="1">
+          <mxGeometry height="30" width="140" x="640" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="logger-level" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=10;" value="Logger.Level" vertex="1">
+          <mxGeometry height="30" width="140" x="640" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="request-options" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=10;" value="Request.Options" vertex="1">
+          <mxGeometry height="30" width="140" x="640" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="other-more" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Helvetica;fontColor=#666666;" value="..." vertex="1">
+          <mxGeometry height="20" width="140" x="640" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="client-to-feign" edge="1" parent="1" source="client-bean" style="endArrow=classic;html=1;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="other-beans-box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="130" />
+              <mxPoint x="590" y="195" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uses-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;fontFamily=Helvetica;" value="used by&#xa;Feign with" vertex="1">
+          <mxGeometry height="25" width="50" x="570" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="-PFf4vwKlHSk5BD_PBgS-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontColor=#666666;fontSize=9;fontStyle=2;" value="Access to per client config" vertex="1">
+          <mxGeometry height="15" width="110" x="180" y="108" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
