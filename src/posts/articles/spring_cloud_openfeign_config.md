@@ -3,7 +3,7 @@ title: "Configuring Spring Cloud OpenFeign the proper way"
 date: "2025-12-24"
 tags: [ "java", "spring", "spring cloud", "openfeign", "preview" ]
 author: 'Abissens'
-git: ...
+git:  https://github.com/elethought-courses/spring-cloud-openfeign-config.git
 ---
 Spring Cloud OpenFeign is the go-to choice for declarative HTTP clients in Spring applications. It integrates well with
 Spring and Spring Cloud features and is highly configurable—I've rarely heard of a team regretting the move from
