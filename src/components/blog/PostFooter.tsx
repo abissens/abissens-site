@@ -75,6 +75,19 @@ export default function PostFooter({
 
       <div className={styles.divider} />
 
+      {gitUrl && (
+        <div className={styles.sourceCodeSection}>
+          <a href={gitUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceCodeButton}>
+            <span className={styles.sourceCodeIcon} />
+            <span className={styles.sourceCodeText}>
+              <span className={styles.sourceCodeLabel}>Companion Repository</span>
+              <span className={styles.sourceCodeHint}>Explore the complete working examples</span>
+            </span>
+            <span className={styles.sourceCodeArrow} />
+          </a>
+        </div>
+      )}
+
       {author && (
         <div className={styles.authorCard}>
           <span className={styles.writtenBy}>Written by</span>
@@ -106,21 +119,6 @@ export default function PostFooter({
               </a>
             )}
           </div>
-          {gitUrl && (
-            <a href={gitUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceCodeLink}>
-              <span className={styles.sourceCodeIcon} />
-              <span>View source code</span>
-            </a>
-          )}
-        </div>
-      )}
-
-      {!author && gitUrl && (
-        <div className={styles.sourceCodeOnly}>
-          <a href={gitUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceCodeLink}>
-            <span className={styles.sourceCodeIcon} />
-            <span>View source code</span>
-          </a>
         </div>
       )}
 

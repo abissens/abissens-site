@@ -29,6 +29,47 @@
     .author {
       margin-left: 15px;
     }
+
+    .sourceCodeBadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 15px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      color: var(--secondary);
+      background: var(--surface, rgba(127, 127, 127, 0.1));
+      border-radius: 4px;
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+
+      &:hover {
+        color: var(--text);
+        background: var(--code-bg, rgba(127, 127, 127, 0.15));
+      }
+
+      .codeIcon {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: currentColor;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'%3E%3C/polyline%3E%3Cpolyline points='8 6 2 12 8 18'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
+        mask-size: contain;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'%3E%3C/polyline%3E%3Cpolyline points='8 6 2 12 8 18'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
+        -webkit-mask-size: contain;
+      }
+
+      @media (max-width: 640px) {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    .postHead {
+      flex-wrap: wrap;
+      gap: 4px;
+    }
   }
 
   .tags {

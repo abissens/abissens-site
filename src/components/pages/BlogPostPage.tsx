@@ -44,6 +44,18 @@ export default function BlogPostPage({ post, mode }: BlogPostPageProps) {
           <div className={styles.calendar}>&nbsp;</div>
           <span>{formattedDate}</span>
           <AuthorComponent className={styles.author} author={author} />
+          {socialUrls?.git && (
+            <a
+              href={socialUrls.git}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.sourceCodeBadge}
+              aria-label="View source code"
+            >
+              <span className={styles.codeIcon}>&nbsp;</span>
+              <span>Source Code</span>
+            </a>
+          )}
         </div>
         <TagList tags={tags} showLinks={true} className={styles.tags} />
       </div>

@@ -23,6 +23,9 @@ What HTTP client library am I actually using? And my favorite: why can't I parse
 
 This article explores these questions and provides practical patterns for configuring OpenFeign clients properly.
 
+The configuration patterns discussed here are demonstrated in a [companion repository](https://github.com/elethought-courses/spring-cloud-openfeign-config.git)
+with working examples for each HTTP client implementation.
+
 First, let's review some Spring Cloud OpenFeign basics.
 
 The framework simplifies HTTP client development by letting you declare service interfaces with annotations
